@@ -14,3 +14,4 @@ const Cell = ({ value, validation, onClick }) => {
 };
 
 export default Cell;
+

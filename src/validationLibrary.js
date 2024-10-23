@@ -1,21 +1,42 @@
 export const validateRow = (grid, rowIndex) => {
     const row = grid[rowIndex];
-    return validateSequence(row) && validateBalance(row);
+    return !row.some(cell => cell == undefined) && validateSequence(row) && validateBalance(row);
   };
   
   export const validateColumn = (grid, colIndex) => {
     const column = grid.map(row => row[colIndex]);
-    return validateSequence(column) && validateBalance(column);
+    return !column.some(cell => cell == undefined) && validateSequence(column) && validateBalance(column);
   };
   
-  // Universal validation logic for ensuring no more than 2 successive states and equal number of states
-  export const validateGridOnCellChange = (grid, rowIndex, colIndex) => {
-    const isRowValid = validateRow(grid, rowIndex);
-    const isColumnValid = validateColumn(grid, colIndex);
+  export const validateWholeGrid = (grid) => {
+    const size = grid.length;
+    let isGridValid = true;
+    const validationResults = Array.from({ length: size }, () => Array(size).fill(undefined));
+  
+    for (let i = 0; i < size; i++) {
+      const isRowValid = validateRow(grid, i);
+      const isColumnValid = validateColumn(grid, i);
+  
+      for (let j = 0; j < size; j++) {
+        if (!isRowValid) {
+          validationResults[i][j] = 'invalid';
+          isGridValid = false;
+        } else if (validationResults[i][j] !== 'invalid') {
+          validationResults[i][j] = 'valid';
+        }
+  
+        if (!isColumnValid) {
+          validationResults[j][i] = 'invalid';
+          isGridValid = false;
+        } else if (validationResults[j][i] !== 'invalid') {
+          validationResults[j][i] = 'valid';
+        }
+      }
+    }
   
     return {
-      isRowValid,
-      isColumnValid,
+      isGridValid,
+      validationResults,
     };
   };
   
