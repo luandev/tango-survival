@@ -3,12 +3,7 @@
 Welcome to **Tango-Survival**, the game that will twist your logic and keep you on your toes. Imagine Sudoku but with shapes, a lot more flair, and a little less math. 🌀✨
 
 ## What is Tango-Survival?
-Tango-Survival is a React-based grid game where the challenge is to fill a 4x4 grid with circles, squares, and empty cells. But wait, there’s a twist! You must do this without ever having more than **two consecutive shapes** in a row or column. Oh, and every row and column must be perfectly balanced between the shapes. It's all about the dance of logic, baby! 💃🕺
-
-### Game Features
-- 🎲 **Grid Gameplay**: A 4x4 grid where every cell is a potential masterpiece (or disaster). No pressure.
-- 🔍 **Validation Logic**: Get instant feedback when you've broken a rule. Rows and columns will cry out (literally, they change color) if they're incomplete, invalid, or just plain wrong.
-- 🚀 **Built with React**: Built with love, hooks, and a lot of coffee. ☕
+Tango-Survival is a React-based grid game based on [linkedin game tango](https://www.linkedin.com/games/tango/) where the challenge is to fill a NxN grid with circles, squares, and empty cells. But wait, there’s a twist! You must do this without ever having more than **two consecutive shapes** in a row or column. Oh, and every row and column must be perfectly balanced between the shapes. It's all about the dance of logic, baby! 💃🕺
 
 ### Rules
 1. **No more than 2 consecutive shapes** in a row or column. It’s called “Tango” because you need to keep the balance – no over-clustering!
