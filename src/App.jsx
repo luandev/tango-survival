@@ -21,7 +21,7 @@ function App() {
     // Run validation after each cell change
     const { isGridValid, validationResults } = validateWholeGrid(gridData)
     if (isGridValid) {
-      setSize(prevSize => prevSize + 1);
+      setSize(prevSize => prevSize + 3);
       setGridData(Array.from({ length: size + 1 }, () => Array(size + 1).fill(null)));
       setValidationData(Array.from({ length: size + 1 }, () => Array(size + 1).fill(undefined)));
     } else {
