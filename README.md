@@ -1,8 +1,59 @@
-# React + Vite
+# 💃 Tango-Survival 💃
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Tango-Survival**, the game that will twist your logic and keep you on your toes. Imagine Sudoku but with shapes, a lot more flair, and a little less math. 🌀✨
 
-Currently, two official plugins are available:
+## What is Tango-Survival?
+Tango-Survival is a React-based grid game where the challenge is to fill a 4x4 grid with circles, squares, and empty cells. But wait, there’s a twist! You must do this without ever having more than **two consecutive shapes** in a row or column. Oh, and every row and column must be perfectly balanced between the shapes. It's all about the dance of logic, baby! 💃🕺
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Game Features
+- 🎲 **Grid Gameplay**: A 4x4 grid where every cell is a potential masterpiece (or disaster). No pressure.
+- 🔍 **Validation Logic**: Get instant feedback when you've broken a rule. Rows and columns will cry out (literally, they change color) if they're incomplete, invalid, or just plain wrong.
+- 🚀 **Built with React**: Built with love, hooks, and a lot of coffee. ☕
+
+### Rules
+1. **No more than 2 consecutive shapes** in a row or column. It’s called “Tango” because you need to keep the balance – no over-clustering!
+2. **Equal number of shapes** in each row and column. It’s all about that balance. Think of it like keeping your dance partner on their toes!
+3. **Complete the grid** and achieve perfect balance to win the game. ⚖️
+
+### How to Play
+- 🖱️ **Click on a Cell**: Toggle between circle, square, or empty. Find that perfect configuration!
+- ⚠️ **Watch for Warnings**: Rows or columns turning a sad, invalid red? Time to re-evaluate your choices!
+- 🏆 **Win by Filling the Grid Correctly**: Achieve balance and harmony across the grid to master the tango!
+
+### Installation
+Ready to dance? Here's how to start:
+
+```bash
+# Clone this repo
+$ git clone https://github.com/luandev/tango-survival.git
+
+# Enter the project directory
+$ cd tango-survival
+
+# Install dependencies
+$ npm install
+
+# Run the game
+$ npm start
+```
+
+### Technology Stack
+- ⚛️ **React**: The heart and soul of our dancing grid.
+- 🎨 **CSS**: For all the beautiful colors, styles, and row/column expressions of emotion.
+- 🧪 **Jest**: Tested to make sure the logic dances perfectly every time.
+
+### Want to Contribute?
+If you’ve got an even better dance step to add (a.k.a. feature or enhancement), we welcome it! Fork the repo, make your changes, and submit a pull request. And don’t forget to ⭐ this project if you like it!
+
+### License
+This project is licensed under the MIT License. Because open-source should be as free as a well-choreographed dance. 🕊️
+
+### Acknowledgements
+Special thanks to coffee for fueling this project, and to every bug that made us debug until 3 a.m. You made us stronger. 💪
+
+Happy dancing, coders! 🎶💻🕺💃
+
+---
+
+**⭐ Gimme a star 😜 ⭐**
+
