@@ -1,12 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Grid from './components/Grid';
 import { useGrid } from './hooks/useGrid';
 import { GameProvider } from './context/GameContext';
 import './App.css';
 
 function App() {
-  const gridRef = useRef();
-  const { gridData, handleCellChange, validateCell } = useGrid(4, gridRef);
+  const gridRef = useRef(null);
+  const { gridData, validationData, handleCellChange } = useGrid(4);
 
   return (
     <GameProvider>
@@ -16,8 +16,8 @@ function App() {
           ref={gridRef}
           size={4}
           gridData={gridData}
+          validationData={validationData}
           onCellChange={handleCellChange}
-          validateCell={validateCell}
         />
         <footer style={{ marginTop: '20px' }}>
           <p>⭐ Gimme a star on GitHub ⭐</p>
@@ -26,5 +26,6 @@ function App() {
     </GameProvider>
   );
 }
+
 
 export default App;
