@@ -5,7 +5,7 @@ import './Grid.css';
 const Cell = ({ value, validation, onClick }) => {
   return (
     <div
-      className={`grid-cell ${value} ${validation}`}
+      className={`grid-cell ${validation}`}
       onClick={onClick}
     >
       {value && <span className={value} />}

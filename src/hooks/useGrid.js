@@ -22,17 +22,22 @@ export const useGrid = (size) => {
 
     if (isRowComplete) {
       updatedValidation[row] = updatedValidation[row].map(() => validationResults.isRowValid ? 'valid' : 'invalid');
+    } else {
+      updatedValidation[row] = updatedValidation[row].map(() => undefined);
     }
 
     if (isColumnComplete) {
       for (let i = 0; i < size; i++) {
         updatedValidation[i][col] = validationResults.isColumnValid ? 'valid' : 'invalid';
       }
+    } else {
+      for (let i = 0; i < size; i++) {
+        updatedValidation[i][col] = undefined;
+      }
     }
 
     setValidationData(updatedValidation);
   };
-
 
   return {
     gridData,
