@@ -54,8 +54,11 @@ export const validateWholeGrid = (grid) => {
 // Function to set the validation status for an entire row
 const setRow = (validationResults, rowIndex, status) => {
   for (let colIndex = 0; colIndex < validationResults[rowIndex].length; colIndex++) {
-    if (validationResults[rowIndex][colIndex] !== 'valid' || status === 'valid') {
+    if (validationResults[rowIndex][colIndex] === undefined || validationResults[rowIndex][colIndex] === status) {
       validationResults[rowIndex][colIndex] = status;
+    }
+    else {
+      validationResults[rowIndex][colIndex] = 'cross';
     }
   }
 };
@@ -63,8 +66,11 @@ const setRow = (validationResults, rowIndex, status) => {
 // Function to set the validation status for an entire column
 const setColumn = (validationResults, colIndex, status) => {
   for (let rowIndex = 0; rowIndex < validationResults.length; rowIndex++) {
-    if (validationResults[rowIndex][colIndex] !== 'valid' || status === 'valid') {
+    if (validationResults[rowIndex][colIndex] === undefined || validationResults[rowIndex][colIndex] === status) {
       validationResults[rowIndex][colIndex] = status;
+    }
+    else {
+      validationResults[rowIndex][colIndex] = 'cross';
     }
   }
 };

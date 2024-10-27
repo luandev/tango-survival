@@ -1,6 +1,12 @@
 .grid {
     display: flex;
     flex-direction: column;
+    background-color: rgb(235, 235, 235);
+    margin-bottom: 10em;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow:  0.2em 0.4em 0.4em 0.2em #a7a7a7 inset;
+    border: 1px solid black;
   }
   .grid-row {
     display: flex;
@@ -9,28 +15,39 @@
     min-width: 50px;
     min-height: 50px;
     border: 1px solid #000;
+    border-radius: 3px;
+    margin: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     background-color: rgb(255, 255, 245);
+    box-shadow:  0.1em 0.2em 0.2em 0.1em #a7a7a752, 0.1em 0.2em 0.2em 0.1em inset #ffffffa2 ;
   }
   .circle {
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.6);
+    border: 1px solid red;
     border-radius: 50%;
     width: 30px;
     height: 30px;
   }
   .square {
     background-color: blue;
+    background-color: rgba(0, 0, 255, 0.6);
+    border: 1px solid blue;
+    border-radius: 10%;
     width: 30px;
     height: 30px;
   }
   .valid {
     background-color: #d7f8dc;
-    border-color: #1bd65a;
+    border-color: #5efa92;
   }
   .invalid {
     background-color: #f8d7da;
     border-color: #f5c6cb;
   }
+  .cross {
+    background-color: #fff3bf;
+    border-color: #f5c84e;
+}

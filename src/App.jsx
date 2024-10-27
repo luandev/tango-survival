@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Grid from './components/Grid';
 import { GameProvider } from './context/GameContext';
 import { validateWholeGrid } from './validationLibrary'
@@ -31,20 +31,24 @@ function App() {
   }
 
   return (
-    <GameProvider>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <h1>💃 tango 💃</h1>
-        <Grid
-          size={size}
-          gridData={gridData}
-          validationData={validationData}
-          onCellChange={handleCellChange}
-        />
-        <footer style={{ marginTop: '20px' }}>
-          <p>⭐ Gimme a star on GitHub ⭐</p>
-        </footer>
-      </div>
-    </GameProvider>
+    <Fragment>
+      <header>
+        <h1 >💃 tango 💃</h1>
+      </header>
+      <GameProvider>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <Grid
+            size={size}
+            gridData={gridData}
+            validationData={validationData}
+            onCellChange={handleCellChange}
+          />
+        </div>
+      </GameProvider>
+      <footer style={{ marginTop: '20px' }}>
+        <p>⭐ Gimme a star on GitHub ⭐</p>
+      </footer>
+    </Fragment>
   );
 }
 export default App;
