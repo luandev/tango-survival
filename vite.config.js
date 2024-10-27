@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [react({include: "**/*.jsx", usePolling: true})],
   build: {
     assetsDir:'.',
+    rollupOptions: {
+      output: {
+        assetFileNames: '[name].[ext]',
+        entryFileNames: '[name].js'
+      }
+    }
   }
 })
