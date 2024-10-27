@@ -14,7 +14,7 @@ function App() {
   const handleCellChange = (row, col) => {
     const updatedGrid = [...gridData];
     const currentState = updatedGrid[row][col];
-    const newState = currentState === 'circle' ? 'square' : currentState === 'square' ? null : 'circle';
+    const newState = currentState === 'circle' ? 'square' : 'circle';
     updatedGrid[row][col] = newState;
 
     setGridData(updatedGrid);
