@@ -1,0 +1,17 @@
+.timer .low {
+    color: rgb(255, 0, 0);
+    font-size: 5em;
+    font-weight: bold;
+}
+
+.timer .med {
+    color: rgb(255, 115, 0);
+    font-size: 5em;
+    font-weight: bold;
+}
+
+.timer .high {
+    color: rgb(166, 255, 0);
+    font-size: 5em;
+    font-weight: bold;
+}
