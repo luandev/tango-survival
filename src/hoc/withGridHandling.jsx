@@ -10,7 +10,7 @@ import { validateWholeGrid } from '../validationLibrary';
  * @param {number} options.size - Initial grid size.
  * @returns {React.Component} - A wrapped component with grid handling functionality.
  */
-const withGridHandling = (WrappedComponent, { gridData = [], size = 4 }) => {
+const withGridHandling = (WrappedComponent, { gridData = [], size = 4 } = {}) => {
   return ({ onLevelUp, ...props }) => {
     const [validationData, setValidationData] = useState(
       Array.from({ length: size }, () => Array(size).fill(undefined))

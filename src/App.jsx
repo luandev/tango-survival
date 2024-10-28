@@ -1,3 +1,4 @@
+// App.js
 import React, { Fragment, useState } from 'react';
 import Grid from './components/Grid';
 import { GameProvider } from './context/GameContext';
@@ -6,14 +7,15 @@ import Modal from './components/Modal';
 import LevelIndicator from './components/LevelIndicator';
 import withGridHandling from './hoc/withGridHandling';
 import withPersistentStorage from './hoc/withPersistentStorage';
+import { levels } from './levels'; // Import levels data
 import './App.css';
 
-const initialSize = 4;
-const EnhancedGrid = withGridHandling(Grid, { size: initialSize, gridData: Array.from({ length: initialSize }, () => Array(initialSize).fill(null)) });
+// Wrap the Grid component with grid handling logic
+const EnhancedGrid = withGridHandling(Grid);
 
 function App() {
-  const totalLevels = 10;
-  const [level, setLevel] = useState(1);
+  const totalLevels = levels.length;
+  const [levelIndex, setLevelIndex] = useState(0); // Track current level index
   const [time, setTime] = useState(15000);
   const [showModal, setShowModal] = useState(true);
 
@@ -26,24 +28,36 @@ function App() {
 
   const handleComplete = () => {
     console.log('Countdown completed!');
+    // Handle game over logic here
   };
 
   const handleLevelUp = () => {
-    setLevel((prevLevel) => prevLevel + 1);
-    setTime(15000); // Reset the timer for the new level, if necessary
+    if (levelIndex < totalLevels - 1) {
+      setLevelIndex((prevIndex) => prevIndex + 1);
+      setTime(15000); // Reset the timer for the new level
+    } else {
+      console.log('All levels completed!');
+      // Handle end-of-game logic here, such as showing a congratulatory message
+    }
   };
+
+  const currentLevel = levels[levelIndex]; // Get current level data
 
   return (
     <Fragment>
       <header>
         <h1>💃 tango 💃</h1>
-        <LevelIndicator currentLevel={level} totalLevels={totalLevels} />
+        <LevelIndicator currentLevel={currentLevel.level} totalLevels={totalLevels} />
       </header>
       <main>
         <GameProvider>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
-            <EnhancedGrid onLevelUp={handleLevelUp} /> 
+            <EnhancedGrid
+              onLevelUp={handleLevelUp}
+              size={currentLevel.size}
+              gridData={currentLevel.gridData}
+            /> {/* Pass current level data */}
           </div>
         </GameProvider>
       </main>
