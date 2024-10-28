@@ -37,17 +37,32 @@ html, body {
   --footer-height-small: 60px; /* Smaller footer height for mobile */
   --header-height: 150px;
   --header-height-small: 80px; /* Smaller header height for mobile */
+  color: var(--color-text-dark);
 }
 
 /* Body Layout */
 body {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   min-height: 100vh;
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding-top: var(--header-height);
+  padding-bottom: var(--footer-height);
+  width: 100%;
+  text-align: center;
 }
 
 /* Headings */
