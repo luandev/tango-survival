@@ -9,13 +9,13 @@ export default defineConfig({
     assetsDir:'.',
     rollupOptions: {
       output: {
-        assetFileNames: '[name].[ext]',
-        entryFileNames: '[name].JS',
-        inlineDynamicImports: false,
-        format: 'iife',
-        manualChunks: () => {
-          return 'Any string'
-        },
+        assetFileNames: '[hash:10].',
+        entryFileNames: '[hash:10].js',
+        // inlineDynamicImports: false,
+        // format: 'iife',
+        // manualChunks: () => {
+        //   return 'Any string'
+        // },
       }
     }
   }

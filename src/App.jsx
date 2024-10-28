@@ -7,7 +7,7 @@ import Modal from './components/Modal';
 import LevelIndicator from './components/LevelIndicator';
 import withGridHandling from './hoc/withGridHandling';
 import { levels } from './levels';
-import './App.css';
+//TESTCSS import './App.css';
 
 const EnhancedGrid = withGridHandling(Grid);
 

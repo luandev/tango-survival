@@ -1,5 +1,5 @@
 import React from 'react';
-import './LevelIndicator.css';
+//TESTCSS import './LevelIndicator.css';
 
 const LevelIndicator = ({ currentLevel, totalLevels }) => {
   return (
