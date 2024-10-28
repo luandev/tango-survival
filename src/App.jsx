@@ -63,16 +63,17 @@ function App() {
       {showModal && (
         <Modal
           message={`
-## Welcome to Tango!
+## Welcome to Tango!  
 ### Rules
-- No more than 2 consecutive shapes in a row or column. It’s called “Tango” because you need to keep the balance – no over-clustering!
-- Equal number of shapes in each row and column. It’s all about that balance. Think of it like keeping your dance partner on their toes!
-- Complete the grid and achieve perfect balance to win the game. ⚖️
+- Max 2 reapeated shapes
+- Rows and columns must match, like sudoku
+- Run out of time? Game over.
 
 ### How to Play
-- 🖱️ Click on a Cell: Toggle between circle, square, or empty. Find that perfect configuration!
-- ⚠️ Watch for Warnings: Rows or columns turning a sad, invalid red? Time to re-evaluate your choices!
-- 🏆 Win by Filling the Grid Correctly: Achieve balance and harmony across the grid to master the tan
+- 👉 Click cells to toggle circle or square.
+- 💀 Red means missteps.
+- 🏆 Balance the grid to win!
+- ✌️ Challange your friends to beat your score
             `}
           showOk={true}
           onOk={handleStartGame}
