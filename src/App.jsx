@@ -43,7 +43,7 @@ function App() {
   return (
     <Fragment>
       <header>
-        <h1>💃 tango 💃</h1>
+        <h1>💃 tango</h1>
       </header>
       <main>
         <GameProvider>
@@ -58,7 +58,7 @@ function App() {
         </GameProvider>
       </main>
       <footer >
-        <p>⭐ Gimme a star on GitHub ⭐</p>
+        <p>Gimme feedback and a ⭐ on <a href="https://github.com/luandev/tango-survival">GitHub</a>!</p>
       </footer>
       {showModal && (
         <Modal
