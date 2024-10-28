@@ -4,14 +4,14 @@
     --line-height-base: 1.5;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
-    --color-text-light: #213547;
+    --color-text-light: #212121; /* Dark gray for text */
     --color-text-dark: rgba(255, 255, 255, 0.87);
-    --color-background-light: #ffffff;
-    --color-background-dark: #1a1a1a;
-    --color-primary: #646cff;
-    --color-primary-hover: #535bf2;
-    --color-secondary-hover: #747bff;
-    --color-shadow: #a7a7a7;
+    --color-background-light: #FFFFFF; /* White background */
+    --color-background-dark: #1E1E1E; /* Dark background for contrast */
+    --color-primary: #6200EE; /* Vibrant purple */
+    --color-primary-hover: #3700B3; /* Darker purple on hover */
+    --color-secondary-hover: #03DAC6; /* Teal accent */
+    --color-shadow: rgba(0, 0, 0, 0.2); /* Subtle shadow */
     --border-radius: 8px;
     --spacing-padding-button: 0.6em 1.2em;
     --footer-height: 100px;
@@ -20,44 +20,58 @@
     --header-height-small: 80px;
   
     /* Theme Colors */
-    --color-grid-background: #ebebeb;
-    --color-grid-box-shadow: #a7a7a7de;
-    --color-grid-cell-border: #bdbdbd;
-    --color-grid-cell-background: #fffff5;
-    --color-grid-cell-box-shadow1: #a7a7a752;
-    --color-grid-cell-box-shadow2: #ffffffa2;
-    --color-circle-background: #ff0099;
-    --color-circle-border: red;
-    --color-square-background: #00f9;
-    --color-square-border: blue;
-    --color-valid-background: #d7f8dc;
-    --color-valid-border: #5efa92;
-    --color-invalid-background: #f8d7da;
-    --color-invalid-border: #f5c6cb;
-    --color-cross-background: #fff3bf;
-    --color-cross-border: #f5c84e;
-    --color-timer-low: red;
-    --color-timer-med: #ff7300;
-    --color-timer-high: #a6ff00;
-    --color-progress-bar-background: #eee;
-    --color-progress-bar-box-shadow1: #ffffffa2;
-    --color-progress-bar-box-shadow2: #a7a7a752;
-    --color-progress-background: #1762e5c2;
-    --color-modal-overlay-background: #00000080;
-    --color-modal-content-color: #2c353d;
-    --color-modal-content-background: #e7e7e7;
-    --color-modal-content-box-shadow1: #5f5f5fd8;
-    --color-modal-content-box-shadow2: #ffffffaf;
-    --color-modal-buttons-text: #fff;
-    --color-level-circle-background: #d3d3d3;
-    --color-level-circle-box-shadow1: #ffffffa2;
-    --color-level-circle-box-shadow2: #a7a7a752;
-    --color-level-circle-highlighted-background: #1762e5c2;
-    --color-logo-hover-drop-shadow: #646cffaa;
-    --color-logo-react-hover-drop-shadow: #61dafbaa;
-    --color-read-the-docs: #888;
+    --color-grid-background: #F0F0F0; /* Light gray */
+    --color-grid-box-shadow: rgba(0, 0, 0, 0.1);
+    --color-grid-cell-border: #CCCCCC;
+    --color-grid-cell-background: #FFFFFF; /* White cells */
+    --color-grid-cell-box-shadow1: rgba(0, 0, 0, 0.05);
+    --color-grid-cell-box-shadow2: rgba(255, 255, 255, 0.8);
+  
+    --color-circle-background: #FF5722; /* Bright orange for circles */
+    --color-circle-border: #E64A19;
+  
+    --color-square-background: #03A9F4; /* Bright blue for squares */
+    --color-square-border: #0288D1;
+  
+    --color-valid-background: #C8E6C9; /* Light green for valid */
+    --color-valid-border: #388E3C;
+  
+    --color-invalid-background: #FFCDD2; /* Light red for invalid */
+    --color-invalid-border: #D32F2F;
+  
+    --color-cross-background: #FFF9C4; /* Light yellow for cross */
+    --color-cross-border: #FBC02D;
+  
+    --color-timer-low: #D32F2F; /* Red for low time */
+    --color-timer-med: #FFA000; /* Amber for medium time */
+    --color-timer-high: #388E3C; /* Green for high time */
+  
+    --color-progress-bar-background: #E0E0E0; /* Gray background */
+    --color-progress-bar-box-shadow1: rgba(255, 255, 255, 0.8);
+    --color-progress-bar-box-shadow2: rgba(0, 0, 0, 0.1);
+    --color-progress-background: #6200EE; /* Purple progress */
+  
+    --color-modal-overlay-background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  
+    --color-modal-content-color: #212121; /* Dark text */
+    --color-modal-content-background: #FFFFFF; /* White background */
+    --color-modal-content-box-shadow1: rgba(0, 0, 0, 0.2);
+    --color-modal-content-box-shadow2: rgba(255, 255, 255, 0.8);
+  
+    --color-modal-buttons-text: #FFFFFF; /* White text on buttons */
+  
+    --color-level-circle-background: #BDBDBD; /* Gray circles */
+    --color-level-circle-box-shadow1: rgba(255, 255, 255, 0.8);
+    --color-level-circle-box-shadow2: rgba(0, 0, 0, 0.1);
+    --color-level-circle-highlighted-background: #03DAC6; /* Teal for highlighted levels */
+  
+    --color-logo-hover-drop-shadow: rgba(98, 0, 238, 0.7); /* Purple shadow */
+    --color-logo-react-hover-drop-shadow: rgba(3, 218, 198, 0.7); /* Teal shadow */
+  
+    --color-read-the-docs: #757575; /* Medium gray for less emphasis */
   }
   
+  /* Body Styles */
   body {
     margin: 0;
     padding: 0;
@@ -70,7 +84,8 @@
     line-height: var(--line-height-base);
     overflow-x: hidden;
     font-family: var(--font-family);
-    color: var(--color-text-dark);
+    color: var(--color-text-light);
+    background-color: var(--color-background-light);
   }
   
   /* Grid Styles */
@@ -81,7 +96,7 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0.2em 0.4em 0.4em 0.2em var(--color-grid-box-shadow) inset;
-    border: 1px solid black;
+    border: 1px solid #000;
   }
   
   .grid-row {
@@ -205,7 +220,7 @@
     background-color: var(--color-modal-content-background);
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px #0003,
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
       0.1em 0.2em 0.2em 0.1em var(--color-modal-content-box-shadow1),
       0.1em 0.2em 0.2em 0.1em inset var(--color-modal-content-box-shadow2);
     text-align: center;
@@ -227,13 +242,21 @@
     margin: 0 10px;
     padding: 10px 20px;
     cursor: pointer;
+    background-color: var(--color-primary);
     color: var(--color-modal-buttons-text);
+    border: none;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s;
+  }
+  
+  .modal-buttons button:hover {
+    background-color: var(--color-primary-hover);
   }
   
   /* Responsive Modal */
   @media (max-width: 768px) {
     .modal-message {
-      font-size: 0.7em;
+      font-size: 0.9em;
       width: 90%;
       text-align: left;
     }
@@ -316,16 +339,6 @@
     box-sizing: border-box;
   }
   
-  /* HTML and Body */
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    font-family: var(--font-family);
-  }
-  
   /* Main Content */
   main {
     display: flex;
@@ -363,13 +376,14 @@
     font-size: inherit;
     font-weight: var(--font-weight-medium);
     font-family: inherit;
-    background-color: var(--color-background-dark);
+    background-color: var(--color-primary);
+    color: var(--color-modal-buttons-text);
     cursor: pointer;
-    transition: border-color 0.25s;
+    transition: background-color 0.25s;
   }
   
   button:hover {
-    border-color: var(--color-primary);
+    background-color: var(--color-primary-hover);
   }
   
   button:focus,
@@ -385,7 +399,8 @@
     right: 0;
     width: 100%;
     height: var(--header-height);
-    background-color: var(--color-text-light);
+    background-color: var(--color-background-dark);
+    color: var(--color-text-dark);
     box-shadow: 0.2em 0.4em 0.4em 0.2em var(--color-shadow);
     overflow: hidden;
     z-index: 1000;
@@ -399,7 +414,8 @@
     right: 0;
     width: 100%;
     height: var(--footer-height);
-    background-color: var(--color-text-light);
+    background-color: var(--color-background-dark);
+    color: var(--color-text-dark);
     box-shadow: -0.2em -0.4em 0.4em 0.2em var(--color-shadow);
     padding-top: 25px;
     z-index: 1000;
@@ -425,7 +441,12 @@
     }
   
     button {
+      background-color: var(--color-primary);
+    }
+  
+    header, footer {
       background-color: var(--color-background-light);
+      color: var(--color-text-light);
     }
   }
   

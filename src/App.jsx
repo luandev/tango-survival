@@ -48,12 +48,12 @@ function App() {
       <main>
         <GameProvider>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <LevelIndicator currentLevel={currentLevel.level} totalLevels={totalLevels} />
+            <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
             <EnhancedGrid
               onLevelUp={handleLevelUp}
               levelData={currentLevel}
             />
-            <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
-            <LevelIndicator currentLevel={currentLevel.level} totalLevels={totalLevels} />
           </div>
         </GameProvider>
       </main>
