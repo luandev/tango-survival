@@ -11,7 +11,7 @@
     --color-primary: #646cff;
     --color-primary-hover: #535bf2;
     --color-secondary-hover: #747bff;
-    --color-shadow: #a7a7a7;
+    --color-shadow: #1a1a1a99;
     --border-radius: 8px;
     --spacing-padding-button: 0.6em 1.2em;
     --footer-height: 100px;
@@ -40,7 +40,7 @@
     --color-timer-med: #ff7300;
     --color-timer-high: #a6ff00;
     --color-progress-bar-background: #eee;
-    --color-progress-bar-box-shadow1: #ffffffa2;
+    --color-progress-bar-box-shadow1: #222;
     --color-progress-bar-box-shadow2: #a7a7a752;
     --color-progress-background: #1762e5c2;
     --color-modal-overlay-background: #00000080;
@@ -50,15 +50,24 @@
     --color-modal-content-box-shadow2: #ffffffaf;
     --color-modal-buttons-text: #fff;
     --color-level-circle-background: #d3d3d3;
-    --color-level-circle-box-shadow1: #ffffffa2;
+    --color-level-circle-box-shadow1: #222;
     --color-level-circle-box-shadow2: #a7a7a752;
     --color-level-circle-highlighted-background: #1762e5c2;
     --color-logo-hover-drop-shadow: #646cffaa;
     --color-logo-react-hover-drop-shadow: #61dafbaa;
     --color-read-the-docs: #888;
+    --body-background: #2c353d;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      
+    }
   }
   
   body {
+    background-image: url(./assets/bg3.png);
+    background-size: 500px;
     margin: 0;
     padding: 0;
     display: flex;
@@ -71,6 +80,7 @@
     overflow-x: hidden;
     font-family: var(--font-family);
     color: var(--color-text-dark);
+    background-color: var(--body-background);
   }
   
   /* Grid Styles */
@@ -379,6 +389,7 @@
   
   /* Header */
   header {
+    border-bottom: 1px solid var(--color-grid-cell-border);
     position: fixed;
     top: 0;
     left: 0;
@@ -393,6 +404,7 @@
   
   /* Footer */
   footer {
+    border-top: 1px solid var(--color-grid-cell-border);
     position: fixed;
     bottom: 0;
     left: 0;
