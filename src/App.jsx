@@ -2,8 +2,9 @@ import React, { Fragment, useState } from 'react';
 import Grid from './components/Grid';
 import { GameProvider } from './context/GameContext';
 import CountdownTimer from './components/CountdownTimer'
+import Modal from './components/Modal'
 import { validateWholeGrid } from './validationLibrary'
-import tickWav from './assets/tick.wav'
+
 import './App.css';
 
 function App() {
@@ -12,7 +13,13 @@ function App() {
   const [size, setSize] = useState(initialSize);
   const [gridData, setGridData] = useState(Array.from({ length: size }, () => Array(size).fill(null)));
   const [validationData, setValidationData] = useState(Array.from({ length: size }, () => Array(size).fill(undefined)));
-  const [time, setTime] = useState(50000); // Start with 5 seconds
+  const [time, setTime] = useState(15000); // Start with 5 seconds
+  const [showModal, setShowModal] = useState(true);
+
+  const handleStartGame = () => {
+    console.log('Game started!');
+    setShowModal(false); // Dismiss the modal
+  };
 
   const handleComplete = () => {
     console.log('Countdown completed!');
@@ -48,7 +55,7 @@ function App() {
       </header>
       <GameProvider>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <CountdownTimer time={time} onComplete={handleComplete} audioSrc={tickWav} />
+          <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
           <Grid
             size={size}
             gridData={gridData}
@@ -60,6 +67,14 @@ function App() {
       <footer style={{ marginTop: '20px' }}>
         <p>⭐ Gimme a star on GitHub ⭐</p>
       </footer>
+      {showModal && (
+        <Modal 
+          message="Are you ready to start the game?" 
+          showOk={true}
+          showCancel={false} // Only show OK button
+          onOk={handleStartGame}
+        />
+      )}
     </Fragment>
   );
 }

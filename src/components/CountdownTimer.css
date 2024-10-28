@@ -15,3 +15,23 @@
     font-size: 5em;
     font-weight: bold;
 }
+
+.timer span {
+    transition: all 1s;
+    text-align: left;
+     display: block;
+}
+.progress-bar {
+    display: block;
+    width: 300px;
+    height: 20px;
+    background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: #4caf50; /* Change color as desired */
+    transition: width 0.1s;
+}
