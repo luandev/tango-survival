@@ -3,12 +3,14 @@ import Grid from './components/Grid';
 import { GameProvider } from './context/GameContext';
 import CountdownTimer from './components/CountdownTimer';
 import Modal from './components/Modal';
+import LevelIndicator from './components/LevelIndicator'; // Import LevelIndicator
 import { validateWholeGrid } from './validationLibrary';
-import withPersistentStorage from './hoc/withPersistentStorage'
+import withPersistentStorage from './hoc/withPersistentStorage';
 import './App.css';
 
 function App() {
   const initialSize = 4;
+  const totalLevels = 10; // Define total levels
   const [level, setLevel] = useState(1); // Start at level 1
   const [size, setSize] = useState(initialSize);
   const [gridData, setGridData] = useState(Array.from({ length: size }, () => Array(size).fill(null)));
@@ -63,20 +65,20 @@ function App() {
     <Fragment>
       <header>
         <h1>💃 tango 💃</h1>
-        <h2>Level: {level}</h2> {/* Display current level */}
+        <LevelIndicator currentLevel={level} totalLevels={totalLevels} /> {/* LevelIndicator added */}
       </header>
       <main>
-      <GameProvider>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
-          <Grid
-            size={size}
-            gridData={gridData}
-            validationData={validationData}
-            onCellChange={handleCellChange}
-          />
-        </div>
-      </GameProvider>
+        <GameProvider>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
+            <Grid
+              size={size}
+              gridData={gridData}
+              validationData={validationData}
+              onCellChange={handleCellChange}
+            />
+          </div>
+        </GameProvider>
       </main>
       <footer style={{ marginTop: '20px' }}>
         <p>⭐ Gimme a star on GitHub ⭐</p>
