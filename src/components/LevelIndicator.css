@@ -1,0 +1,21 @@
+/* Level Indicator Container */
+.level-indicator {
+    display: flex;
+    gap: 0.5em;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Level Circle */
+  .level-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #d3d3d3; /* Default color for non-highlighted circles */
+    transition: background-color 0.3s ease;
+  }
+  
+  .level-circle.highlighted {
+    background-color: #646cff; /* Color for highlighted circles */
+  }
+  
