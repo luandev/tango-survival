@@ -1,102 +1,121 @@
+/* Base Theme Variables */
 :root {
-    --font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
-    --font-size-base: 1em;
-    --line-height-base: 1.5;
-    --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --color-text-light: #212121; /* Dark gray for text */
-    --color-text-dark: rgba(255, 255, 255, 0.87);
-    --color-background-light: #FFFFFF; /* White background */
-    --color-background-dark: #1E1E1E; /* Dark background for contrast */
-    --color-primary: #6200EE; /* Vibrant purple */
-    --color-primary-hover: #3700B3; /* Darker purple on hover */
-    --color-secondary-hover: #03DAC6; /* Teal accent */
-    --color-shadow: rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    --border-radius: 8px;
-    --spacing-padding-button: 0.6em 1.2em;
-    --footer-height: 100px;
-    --footer-height-small: 60px;
-    --header-height: 150px;
-    --header-height-small: 80px;
+    /* Base Colors (Hue values from 0 to 360) */
+    --color-primary-hue: 20; /* Primary Color Hue */
+    --color-secondary-hue: 1; /* Secondary Color Hue */
+    --color-accent-hue: 260;    /* Accent Color Hue */
   
-    /* Theme Colors */
-    --color-grid-background: #F0F0F0; /* Light gray */
-    --color-grid-box-shadow: rgba(0, 0, 0, 0.1);
-    --color-grid-cell-border: #CCCCCC;
-    --color-grid-cell-background: #FFFFFF; /* White cells */
-    --color-grid-cell-box-shadow1: rgba(0, 0, 0, 0.05);
-    --color-grid-cell-box-shadow2: rgba(255, 255, 255, 0.8);
+    --color-primary: hsl(var(--color-primary-hue), 100%, 50%);
+    --color-secondary: hsl(var(--color-secondary-hue), 100%, 26%);
+    --color-accent: hsl(var(--color-accent-hue), 100%, 50%);
   
-    --color-circle-background: #FF5722; /* Bright orange for circles */
-    --color-circle-border: #E64A19;
+    /* Derived Colors for Light Mode */
+    --color-background: #FFFFFF;
+    --color-text: #212121;
+    --color-shadow: rgba(0, 0, 0, 0.2);
   
-    --color-square-background: #03A9F4; /* Bright blue for squares */
-    --color-square-border: #0288D1;
+    /* Lighten and Darken Amounts */
+    --lighten-10: 10%;
+    --lighten-20: 20%;
+    --darken-10: -10%;
+    --darken-20: -20%;
   
-    --color-valid-background: #C8E6C9; /* Light green for valid */
-    --color-valid-border: #388E3C;
+    /* Derived Colors */
+    --color-primary-light: hsl(var(--color-primary-hue), 100%, calc(50% + 10%));
+    --color-primary-dark: hsl(var(--color-primary-hue), 100%, calc(50% - 10%));
   
-    --color-invalid-background: #FFCDD2; /* Light red for invalid */
-    --color-invalid-border: #D32F2F;
+    --color-secondary-light: hsl(var(--color-secondary-hue), 100%, calc(50% + 10%));
+    --color-secondary-dark: hsl(var(--color-secondary-hue), 100%, calc(50% - 10%));
   
-    --color-cross-background: #FFF9C4; /* Light yellow for cross */
-    --color-cross-border: #FBC02D;
+    --color-accent-light: hsl(var(--color-accent-hue), 100%, calc(50% + 10%));
+    --color-accent-dark: hsl(var(--color-accent-hue), 100%, calc(50% - 10%));
   
-    --color-timer-low: #D32F2F; /* Red for low time */
-    --color-timer-med: #FFA000; /* Amber for medium time */
-    --color-timer-high: #388E3C; /* Green for high time */
-  
-    --color-progress-bar-background: #E0E0E0; /* Gray background */
-    --color-progress-bar-box-shadow1: rgba(255, 255, 255, 0.8);
-    --color-progress-bar-box-shadow2: rgba(0, 0, 0, 0.1);
-    --color-progress-background: #6200EE; /* Purple progress */
-  
-    --color-modal-overlay-background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  
-    --color-modal-content-color: #212121; /* Dark text */
-    --color-modal-content-background: #FFFFFF; /* White background */
-    --color-modal-content-box-shadow1: rgba(0, 0, 0, 0.2);
-    --color-modal-content-box-shadow2: rgba(255, 255, 255, 0.8);
-  
-    --color-modal-buttons-text: #FFFFFF; /* White text on buttons */
-  
-    --color-level-circle-background: #BDBDBD; /* Gray circles */
-    --color-level-circle-box-shadow1: rgba(255, 255, 255, 0.8);
-    --color-level-circle-box-shadow2: rgba(0, 0, 0, 0.1);
-    --color-level-circle-highlighted-background: #03DAC6; /* Teal for highlighted levels */
-  
-    --color-logo-hover-drop-shadow: rgba(98, 0, 238, 0.7); /* Purple shadow */
-    --color-logo-react-hover-drop-shadow: rgba(3, 218, 198, 0.7); /* Teal shadow */
-  
-    --color-read-the-docs: #757575; /* Medium gray for less emphasis */
+    /* Gradient Colors */
+    --gradient-header: var(--color-secondary-light);
+    --gradient-footer: var(--color-accent-light);
+    --gradient-background: var(--color-accent-light);
   }
   
-  /* Body Styles */
+  /* Dark Mode Variables */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background:  hsl(var(--color-secondary-hue), 100%, 21%);;
+      --color-text: #FFFFFF;
+      --color-shadow: rgba(0, 0, 0, 0.6);
+  
+      /* Adjusted Derived Colors for Dark Mode */
+      --color-primary-light: hsl(var(--color-primary-hue), 100%, calc(50% + 20%));
+      --color-primary-dark: hsl(var(--color-primary-hue), 100%, calc(50% - 20%));
+  
+      --color-secondary-light: hsl(var(--color-secondary-hue), 100%, calc(50% + 20%));
+      --color-secondary-dark: hsl(var(--color-secondary-hue), 100%, calc(50% - 20%));
+  
+      --color-accent-light: hsl(var(--color-accent-hue), 100%, calc(50% + 20%));
+      --color-accent-dark: hsl(var(--color-accent-hue), 100%, calc(50% - 20%));
+  
+      /* Gradient Colors for Dark Mode */
+      --gradient-header: linear-gradient(135deg, var(--color-primary-dark), var(--color-secondary-dark));
+      --gradient-footer: linear-gradient(135deg, var(--color-secondary-dark), var(--color-accent-dark));
+      --gradient-background: linear-gradient(135deg, var(--color-primary-dark), var(--color-accent-dark));
+  
+      /* Adjusted Shadow for Dark Mode */
+      --color-shadow: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  /* Global Styles */
   body {
     margin: 0;
     padding: 0;
+    font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
+    color: var(--color-text);
+    background: var(--gradient-background);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     min-height: 100vh;
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-base);
-    overflow-x: hidden;
-    font-family: var(--font-family);
-    color: var(--color-text-light);
-    background-color: var(--color-background-light);
+  }
+  
+  /* Header */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 150px;
+    background: var(--gradient-header);
+    color: var(--color-text);
+    box-shadow: 0 4px 6px var(--color-shadow);
+    overflow: hidden;
+    z-index: 1000;
+  }
+  
+  /* Footer */
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100px;
+    background: var(--gradient-footer);
+    color: var(--color-text);
+    box-shadow: 0 -4px 6px var(--color-shadow);
+    padding-top: 25px;
+    z-index: 1000;
   }
   
   /* Grid Styles */
   .grid {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-grid-background);
+    background-color: var(--color-primary-light);
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0.2em 0.4em 0.4em 0.2em var(--color-grid-box-shadow) inset;
-    border: 1px solid #000;
+    box-shadow: 0.2em 0.4em 0.4em 0.2em var(--color-shadow) inset;
+    border: 1px solid var(--color-primary-dark);
   }
   
   .grid-row {
@@ -105,25 +124,24 @@
   
   .grid-cell {
     transition: all 0.3s;
-    min-width: 50px;
-    min-height: 50px;
-    border: 1px solid var(--color-grid-cell-border);
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--color-primary-dark);
     border-radius: 3px;
     margin: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background-color: var(--color-grid-cell-background);
-    box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-grid-cell-box-shadow1),
-      0.1em 0.2em 0.2em 0.1em inset var(--color-grid-cell-box-shadow2);
+    background-color: var(--color-background);
+    box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-shadow);
   }
   
   /* Shapes */
   .circle {
     transition: all 0.3s;
-    background-color: var(--color-circle-background);
-    border: 1px solid var(--color-circle-border);
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-accent-dark);
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -131,8 +149,8 @@
   
   .square {
     transition: all 0.3s;
-    background-color: var(--color-square-background);
-    border: 1px solid var(--color-square-border);
+    background-color: var(--color-secondary);
+    border: 1px solid var(--color-secondary-dark);
     border-radius: 10%;
     width: 30px;
     height: 30px;
@@ -140,35 +158,35 @@
   
   /* Cell States */
   .valid {
-    background-color: var(--color-valid-background);
-    border-color: var(--color-valid-border);
+    background-color: var(--color-secondary-light);
+    border-color: var(--color-secondary-dark);
   }
   
   .invalid {
-    background-color: var(--color-invalid-background);
-    border-color: var(--color-invalid-border);
+    background-color: var(--color-accent-light);
+    border-color: var(--color-accent-dark);
   }
   
   .cross {
-    background-color: var(--color-cross-background);
-    border-color: var(--color-cross-border);
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary-dark);
   }
   
   /* Timer */
   .timer .low {
-    color: var(--color-timer-low);
+    color: var(--color-accent);
     font-size: 5em;
     font-weight: 700;
   }
   
   .timer .med {
-    color: var(--color-timer-med);
+    color: var(--color-secondary);
     font-size: 5em;
     font-weight: 700;
   }
   
   .timer .high {
-    color: var(--color-timer-high);
+    color: var(--color-primary);
     font-size: 5em;
     font-weight: 700;
   }
@@ -184,17 +202,16 @@
     display: block;
     width: 285px;
     height: 20px;
-    background-color: var(--color-progress-bar-background);
+    background-color: var(--color-background);
     border-radius: 5px;
     overflow: hidden;
     margin: 0.4em;
-    box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-progress-bar-box-shadow1),
-      0.1em 0.2em 0.2em 0.1em inset var(--color-progress-bar-box-shadow2);
+    box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-shadow);
   }
   
   .progress {
     height: 100%;
-    background-color: var(--color-progress-background);
+    background-color: var(--color-primary);
     transition: width 0.1s;
   }
   
@@ -205,7 +222,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-modal-overlay-background);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -215,14 +232,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    color: var(--color-modal-content-color);
-    background-color: var(--color-modal-content-background);
+    color: var(--color-text);
+    background-color: var(--color-background);
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
-      0.1em 0.2em 0.2em 0.1em var(--color-modal-content-box-shadow1),
-      0.1em 0.2em 0.2em 0.1em inset var(--color-modal-content-box-shadow2);
+    box-shadow: 0 4px 8px var(--color-shadow);
     text-align: center;
     min-width: 285px;
     min-height: 400px;
@@ -243,14 +257,14 @@
     padding: 10px 20px;
     cursor: pointer;
     background-color: var(--color-primary);
-    color: var(--color-modal-buttons-text);
+    color: var(--color-background);
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: 5px;
     transition: background-color 0.3s;
   }
   
   .modal-buttons button:hover {
-    background-color: var(--color-primary-hover);
+    background-color: var(--color-primary-dark);
   }
   
   /* Responsive Modal */
@@ -275,14 +289,13 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: var(--color-level-circle-background);
+    background-color: var(--color-primary-light);
     transition: background-color 0.3s ease;
-    box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-level-circle-box-shadow1),
-      0.1em 0.2em 0.2em 0.1em inset var(--color-level-circle-box-shadow2);
+    box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-shadow);
   }
   
   .level-circle.highlighted {
-    background-color: var(--color-level-circle-highlighted-background);
+    background-color: var(--color-secondary);
   }
   
   /* Root */
@@ -301,11 +314,11 @@
   }
   
   .logo:hover {
-    filter: drop-shadow(0 0 2em var(--color-logo-hover-drop-shadow));
+    filter: drop-shadow(0 0 2em var(--color-primary));
   }
   
   .logo.react:hover {
-    filter: drop-shadow(0 0 2em var(--color-logo-react-hover-drop-shadow));
+    filter: drop-shadow(0 0 2em var(--color-secondary));
   }
   
   /* Logo Spin Animation */
@@ -331,7 +344,7 @@
   
   /* Read the Docs */
   .read-the-docs {
-    color: var(--color-read-the-docs);
+    color: var(--color-primary-dark);
   }
   
   /* Global Box Sizing */
@@ -345,12 +358,13 @@
     align-items: center;
     justify-content: center;
     flex: 1;
-    padding-top: var(--header-height);
-    padding-bottom: var(--footer-height);
+    padding-top: 150px;
+    padding-bottom: 100px;
     width: 100%;
     text-align: center;
   }
   
+  /* Headers */
   h1 {
     font-size: 3.2em;
     line-height: 1.1;
@@ -358,96 +372,37 @@
   
   /* Links */
   a {
-    font-weight: var(--font-weight-medium);
+    font-weight: 500;
     color: var(--color-primary);
     text-decoration: none;
     transition: color 0.25s;
   }
   
   a:hover {
-    color: var(--color-primary-hover);
+    color: var(--color-primary-dark);
   }
   
   /* Buttons */
   button {
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     border: 1px solid transparent;
-    padding: var(--spacing-padding-button);
+    padding: 0.6em 1.2em;
     font-size: inherit;
-    font-weight: var(--font-weight-medium);
+    font-weight: 500;
     font-family: inherit;
     background-color: var(--color-primary);
-    color: var(--color-modal-buttons-text);
+    color: var(--color-background);
     cursor: pointer;
     transition: background-color 0.25s;
   }
   
   button:hover {
-    background-color: var(--color-primary-hover);
+    background-color: var(--color-primary-dark);
   }
   
   button:focus,
   button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
-  }
-  
-  /* Header */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: var(--header-height);
-    background-color: var(--color-background-dark);
-    color: var(--color-text-dark);
-    box-shadow: 0.2em 0.4em 0.4em 0.2em var(--color-shadow);
-    overflow: hidden;
-    z-index: 1000;
-  }
-  
-  /* Footer */
-  footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: var(--footer-height);
-    background-color: var(--color-background-dark);
-    color: var(--color-text-dark);
-    box-shadow: -0.2em -0.4em 0.4em 0.2em var(--color-shadow);
-    padding-top: 25px;
-    z-index: 1000;
-  }
-  
-  /* Main Adjustments */
-  main {
-    flex: 1;
-    width: 100%;
-    padding-top: var(--header-height);
-    padding-bottom: var(--footer-height);
-  }
-  
-  /* Light Theme Adjustments */
-  @media (prefers-color-scheme: light) {
-    :root {
-      color: var(--color-text-light);
-      background-color: var(--color-background-light);
-    }
-  
-    a:hover {
-      color: var(--color-secondary-hover);
-    }
-  
-    button {
-      background-color: var(--color-primary);
-    }
-  
-    header, footer {
-      background-color: var(--color-background-light);
-      color: var(--color-text-light);
-    }
   }
   
   /* Responsive Adjustments */
@@ -461,11 +416,11 @@
     }
   
     header {
-      height: var(--header-height-small);
+      height: 80px;
     }
   
     footer {
-      height: var(--footer-height-small);
+      height: 60px;
     }
   }
   
@@ -479,12 +434,12 @@
     }
   
     header {
-      height: var(--header-height-small);
+      height: 80px;
       padding-top: 10px;
     }
   
     footer {
-      height: var(--footer-height-small);
+      height: 60px;
       padding-top: 10px;
     }
   }
