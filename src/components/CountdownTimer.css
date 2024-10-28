@@ -23,15 +23,17 @@
 }
 .progress-bar {
     display: block;
-    width: 300px;
+    width: 285px;
     height: 20px;
     background-color: #eee;
     border-radius: 5px;
     overflow: hidden;
+    margin: 0.4em;
+    box-shadow:  0.1em 0.2em 0.2em 0.1em #ffffffa2, 0.1em 0.2em 0.2em 0.1em inset #a7a7a752 ;
 }
 
 .progress {
     height: 100%;
-    background-color: #4caf50; /* Change color as desired */
+    background-color: #1762e5c2; /* Change color as desired */
     transition: width 0.1s;
 }

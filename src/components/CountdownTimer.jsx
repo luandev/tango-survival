@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './CountdownTimer.css';
 
-const CountdownTimer = forwardRef(({ time, onComplete, isPaused, renderProgressBar = true }, ref) => {
+const CountdownTimer = ({ time, onComplete, isPaused, renderProgressBar = true }, ref) => {
     const [timeLeft, setTimeLeft] = useState(time);
     const intervalRef = useRef(null);
     const lastPlayedRef = useRef(null);
@@ -33,10 +33,6 @@ const CountdownTimer = forwardRef(({ time, onComplete, isPaused, renderProgressB
         }
     }, [timeLeft, onComplete, audio]);
 
-    // Expose getCurrentTime function to get the current time left
-    useImperativeHandle(ref, () => ({
-        getCurrentTime: () => timeLeft,
-    }));
 
     const progressPercentage = (timeLeft / time) * 100;
 
@@ -51,6 +47,6 @@ const CountdownTimer = forwardRef(({ time, onComplete, isPaused, renderProgressB
             )}
         </div>
     );
-});
+};
 
 export default CountdownTimer;

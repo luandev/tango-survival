@@ -5,7 +5,7 @@ const LevelIndicator = ({ currentLevel, totalLevels }) => {
   return (
     <div className="level-indicator">
       {Array.from({ length: totalLevels }).map((_, index) => {
-        const isHighlighted = index >= currentLevel - 2 && index <= currentLevel;
+        const isHighlighted = index <= currentLevel -1;
         return (
           <div
             key={index}

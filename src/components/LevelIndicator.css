@@ -13,9 +13,10 @@
     border-radius: 50%;
     background-color: #d3d3d3; /* Default color for non-highlighted circles */
     transition: background-color 0.3s ease;
+    box-shadow:  0.1em 0.2em 0.2em 0.1em #ffffffa2, 0.1em 0.2em 0.2em 0.1em inset #a7a7a752 ;
   }
   
   .level-circle.highlighted {
-    background-color: #646cff; /* Color for highlighted circles */
+    background-color: #1762e5c2; /* Color for highlighted circles */
   }
   
