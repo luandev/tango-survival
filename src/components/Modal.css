@@ -12,11 +12,26 @@
   }
   
   .modal-content {
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    color: rgb(44, 53, 61);
+    background-color: rgb(231, 231, 231);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    min-width: 285px;
+    min-height: 400px;
+    box-shadow:  0.1em 0.2em 0.2em 0.1em #5f5f5fd8, 0.1em 0.2em 0.2em 0.1em inset #ffffffaf ;
+  }
+
+  .modal-message{
+    font-size: 1em;
+    width: 500px;
+    text-align: left;
   }
   
   .modal-buttons {
@@ -27,5 +42,13 @@
     margin: 0 10px;
     padding: 10px 20px;
     cursor: pointer;
+    color: white;
   }
   
+  @media (max-width: 768px) {
+    .modal-message{
+      font-size: 0.7em;
+      width: 90%;
+      text-align: left;
+    }
+  }

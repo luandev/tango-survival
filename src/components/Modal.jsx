@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import './Modal.css';
 
 const Modal = ({ 
@@ -13,7 +14,7 @@ const Modal = ({
 }) => (
   <div className="modal-overlay">
     <div className="modal-content">
-      <p className="modal-message">{message}</p>
+      <ReactMarkdown className="modal-message">{message}</ReactMarkdown>
       {showCheckbox && (
         <label className="modal-checkbox">
           <input 

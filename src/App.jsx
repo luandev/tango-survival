@@ -16,7 +16,7 @@ function App() {
   const [levelIndex, setLevelIndex] = useState(0);
   const currentLevel = levels[levelIndex];
 
-  const [time, setTime] = useState(15000);
+  const [time, setTime] = useState(90000);
   const [showModal, setShowModal] = useState(true);
 
 
@@ -33,7 +33,7 @@ function App() {
   const handleLevelUp = () => {
     if (levelIndex < totalLevels - 1) {
       setLevelIndex((prevIndex) => prevIndex + 1);
-      setTime(15000);
+      setTime(time + 15000);
     } else {
       console.log('All levels completed!');
     }
@@ -44,16 +44,16 @@ function App() {
     <Fragment>
       <header>
         <h1>💃 tango 💃</h1>
-        <LevelIndicator currentLevel={currentLevel.level} totalLevels={totalLevels} />
       </header>
       <main>
         <GameProvider>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
             <EnhancedGrid
               onLevelUp={handleLevelUp}
               levelData={currentLevel}
             />
+            <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
+            <LevelIndicator currentLevel={currentLevel.level} totalLevels={totalLevels} />
           </div>
         </GameProvider>
       </main>
@@ -62,11 +62,19 @@ function App() {
       </footer>
       {showModal && (
         <Modal
-          message="Are you ready to start the game?"
+          message={`
+## Welcome to Tango!
+### Rules
+- No more than 2 consecutive shapes in a row or column. It’s called “Tango” because you need to keep the balance – no over-clustering!
+- Equal number of shapes in each row and column. It’s all about that balance. Think of it like keeping your dance partner on their toes!
+- Complete the grid and achieve perfect balance to win the game. ⚖️
+
+### How to Play
+- 🖱️ Click on a Cell: Toggle between circle, square, or empty. Find that perfect configuration!
+- ⚠️ Watch for Warnings: Rows or columns turning a sad, invalid red? Time to re-evaluate your choices!
+- 🏆 Win by Filling the Grid Correctly: Achieve balance and harmony across the grid to master the tan
+            `}
           showOk={true}
-          modalId={"intro_message"}
-          showCheckbox={true}
-          showCancel={false}
           onOk={handleStartGame}
         />)}
     </Fragment>
