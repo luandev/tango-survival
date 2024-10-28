@@ -4,7 +4,7 @@ import { GameProvider } from './context/GameContext';
 import CountdownTimer from './components/CountdownTimer';
 import Modal from './components/Modal';
 import { validateWholeGrid } from './validationLibrary';
-
+import withPersistentStorage from './hoc/withPersistentStorage'
 import './App.css';
 
 function App() {
@@ -15,6 +15,8 @@ function App() {
   const [validationData, setValidationData] = useState(Array.from({ length: size }, () => Array(size).fill(undefined)));
   const [time, setTime] = useState(15000); // Start with 15 seconds
   const [showModal, setShowModal] = useState(true);
+
+  const PersistentStartGameModal = withPersistentStorage(Modal, 'gameStarted');
 
   const handleStartGame = () => {
     console.log('Game started!');
@@ -63,6 +65,7 @@ function App() {
         <h1>💃 tango 💃</h1>
         <h2>Level: {level}</h2> {/* Display current level */}
       </header>
+      <main>
       <GameProvider>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
@@ -74,14 +77,17 @@ function App() {
           />
         </div>
       </GameProvider>
+      </main>
       <footer style={{ marginTop: '20px' }}>
         <p>⭐ Gimme a star on GitHub ⭐</p>
       </footer>
       {showModal && (
-        <Modal
+        <PersistentStartGameModal 
           message="Are you ready to start the game?"
           showOk={true}
-          showCancel={false} // Only show OK button
+          modalId={"intro_message"}
+          showCheckbox={true}
+          showCancel={false}
           onOk={handleStartGame}
         />
       )}
