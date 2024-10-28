@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, Fragment } from 'react';
 
 const withPersistentStorage = (WrappedComponent, localStorageKey) => {
   return (props) => {

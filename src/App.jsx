@@ -6,20 +6,19 @@ import CountdownTimer from './components/CountdownTimer';
 import Modal from './components/Modal';
 import LevelIndicator from './components/LevelIndicator';
 import withGridHandling from './hoc/withGridHandling';
-import withPersistentStorage from './hoc/withPersistentStorage';
-import { levels } from './levels'; // Import levels data
+import { levels } from './levels';
 import './App.css';
 
-// Wrap the Grid component with grid handling logic
 const EnhancedGrid = withGridHandling(Grid);
 
 function App() {
   const totalLevels = levels.length;
-  const [levelIndex, setLevelIndex] = useState(0); // Track current level index
+  const [levelIndex, setLevelIndex] = useState(0);
+  const currentLevel = levels[levelIndex];
+
   const [time, setTime] = useState(15000);
   const [showModal, setShowModal] = useState(true);
 
-  const PersistentStartGameModal = withPersistentStorage(Modal, 'gameStarted');
 
   const handleStartGame = () => {
     console.log('Game started!');
@@ -28,20 +27,18 @@ function App() {
 
   const handleComplete = () => {
     console.log('Countdown completed!');
-    // Handle game over logic here
+    // TODO game over modal
   };
 
   const handleLevelUp = () => {
     if (levelIndex < totalLevels - 1) {
       setLevelIndex((prevIndex) => prevIndex + 1);
-      setTime(15000); // Reset the timer for the new level
+      setTime(15000);
     } else {
       console.log('All levels completed!');
-      // Handle end-of-game logic here, such as showing a congratulatory message
     }
   };
 
-  const currentLevel = levels[levelIndex]; // Get current level data
 
   return (
     <Fragment>
@@ -55,25 +52,23 @@ function App() {
             <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
             <EnhancedGrid
               onLevelUp={handleLevelUp}
-              size={currentLevel.size}
-              gridData={currentLevel.gridData}
-            /> {/* Pass current level data */}
+              levelData={currentLevel}
+            />
           </div>
         </GameProvider>
       </main>
-      <footer style={{ marginTop: '20px' }}>
+      <footer >
         <p>⭐ Gimme a star on GitHub ⭐</p>
       </footer>
       {showModal && (
-        <PersistentStartGameModal 
+        <Modal
           message="Are you ready to start the game?"
           showOk={true}
           modalId={"intro_message"}
           showCheckbox={true}
           showCancel={false}
           onOk={handleStartGame}
-        />
-      )}
+        />)}
     </Fragment>
   );
 }
