@@ -9,7 +9,12 @@ export default defineConfig({
     rollupOptions: {
       output: {
         assetFileNames: '[name].[ext]',
-        entryFileNames: '[name].js'
+        entryFileNames: '[name].JS',
+        inlineDynamicImports: false,
+        format: 'iife',
+        manualChunks: () => {
+          return 'Any string'
+        },
       }
     }
   }
