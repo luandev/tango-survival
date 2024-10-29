@@ -5,11 +5,7 @@ import ProgressBar from './ProgressBar';
 const CountdownTimer = ({ timeLeft, totalTime, isPaused }) => {
   const time = timeLeft *100 / totalTime;
 
-  return (
-    <div>
-      {isPaused || timeLeft <= 0 ? null :  <ProgressBar progressPercentage={time} />}
-    </div>
-  );
+  return <ProgressBar progressPercentage={time} />;
 };
 
 export default CountdownTimer;

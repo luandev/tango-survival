@@ -182,17 +182,31 @@ body {
 
 /* Progress Bar */
 .progress-bar {
-  display: block;
-  width: 285px;
-  height: 20px;
-  background-color: var(--color-progress-bar-background);
-  border-radius: 5px;
+  display: flex;
+  width: 100%;
+  height: 16px; /* Match the height of the level pills */
   overflow: hidden;
   margin: 0.4em;
-  box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-progress-bar-box-shadow1),
-    0.1em 0.2em 0.2em 0.1em inset var(--color-progress-bar-box-shadow2);
+  box-shadow: 0.1em 0.2em 0.2em 0.1em inset var(--color-progress-bar-box-shadow2);
+  transition: background-color 0.3s ease; /* Smooth transition */
+
+  background-color: var(--color-grid-background);
+  border-radius: 5px;
+  border: 1px solid white;
 }
 
+/* Progress Bar Fill */
+.progress {
+  height: 100%;
+  width: 0%; /* Initial width */
+  background-color: var(--color-level-circle-highlighted-background);
+  transition: width 0.3s, background-color 0.3s ease; /* Smooth transitions */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow for the fill */
+  animation: progressColor 1s linear forwards;
+  animation-play-state: paused; /* Start paused */
+}
+
+/* Danger Pulse Animation for Progress Bar */
 @keyframes progressColor {
   0% {
     background-color: var(--color-progress-background); /* Start color (green) */
@@ -201,14 +215,6 @@ body {
     background-color: hsl(0, 80%, 40%); /* End color (red) */
   }
 }
-
-.progress {
-  height: 100%;
-  transition: width 0.3s;
-  animation: progressColor 1s linear forwards;
-  animation-play-state: paused; /* Start paused */
-}
-
 @keyframes dangerPulse {
   0% {
     box-shadow: 0 0 5px 2px rgba(255, 0, 0, 0.5);
@@ -222,7 +228,8 @@ body {
 }
 
 .progress.danger {
-  animation: progressColor 1s linear forwards, dangerPulse 1s infinite;
+  background-color: var(--color-invalid-background); /* Red color for danger */
+  animation:  progressColor 1s linear forwards, dangerPulse 1s infinite ease-in-out;
 }
 
 
@@ -244,13 +251,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: var(--color-modal-content-color);
-  background-color: var(--color-modal-content-background);
+  color: #ffffff;
+  background-color: #222a31;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 4px 8px #0003,
-    0.1em 0.2em 0.2em 0.1em var(--color-modal-content-box-shadow1),
-    0.1em 0.2em 0.2em 0.1em inset var(--color-modal-content-box-shadow2);
+  /* box-shadow: 0 4px 8px #0003, 0.1em 0.2em 0.2em 0.1em var(--color-modal-content-box-shadow1), 0.1em 0.2em 0.2em 0.1em inset var(--color-modal-content-box-shadow2); */
   text-align: center;
   min-width: 285px;
   min-height: 400px;
@@ -284,34 +289,44 @@ body {
 
 /* Level Indicator */
 .level-indicator {
+  width: 100%;
   display: flex;
-  gap: 0.5em;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid white;
 }
 
-.level-circle {
-  width: 15px;
+/* Pill-shaped Level Bar */
+.level-pill {
+  display: flex;
   height: 15px;
-  border-radius: 50%;
+  flex: 1;
   background-color: var(--color-level-circle-background);
   transition: background-color 0.3s ease;
-  box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-level-circle-box-shadow1),
-    ;
 }
 
-.level-circle.highlighted {
+.level-pill:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.level-pill:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.level-pill.highlighted {
   background-color: var(--color-level-circle-highlighted-background);
+  animation: pop-in 1s ease-out, pulse 2s infinite ease-in-out;
 }
 
-.level-circle.done {
+.level-pill.done {
   background-color: var(--color-level-circle-highlighted-background);
 }
 
 /* Pulsing Animation */
-
-
 @keyframes pop-in {
   0% {
     transform: scale(0.5);
@@ -337,11 +352,6 @@ body {
   100% {
     box-shadow: 0 0 5px rgba(23, 98, 229, 0.5);
   }
-}
-
-/* Apply Animation to Highlighted Circle */
-.level-circle.highlighted {
-  animation: pop-in 1s ease-out, pulse 2s infinite ease-in-out;
 }
 
 /* Root */
@@ -417,8 +427,6 @@ main {
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding-top: var(--header-height);
-  padding-bottom: var(--footer-height);
   width: 100%;
   text-align: center;
 }
@@ -504,8 +512,6 @@ footer {
 main {
   flex: 1;
   width: 100%;
-  padding-top: var(--header-height);
-  padding-bottom: var(--footer-height);
 }
 
 /* Light Theme Adjustments */

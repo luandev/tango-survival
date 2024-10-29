@@ -10,7 +10,7 @@ const LevelIndicator = ({ currentLevel, totalLevels }) => {
         return (
           <div
             key={index}
-            className={`level-circle ${isCompleted ? 'done' : ''} ${isCurrentLevel ? 'highlighted' : ''}`}
+            className={`level-pill ${isCompleted ? 'done' : ''} ${isCurrentLevel ? 'highlighted' : ''}`}
           />
         );
       })}
