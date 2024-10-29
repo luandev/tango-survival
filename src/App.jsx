@@ -129,17 +129,10 @@ function App() {
               <div className='modal-content'>
                 <ReactMarkdown className="modal-message">{`
 ## Welcome to Tango!
-#### The Rogue-like Binary Sudoku Game
 
-
-⚖️ **Balance the Grid** - Each row and column must contain an equal number of circles and squares.
-
-📲 **Avoid Clustering** - No more than two of the same shapes should appear consecutively.
-
-🤔 **Group Movement** - Some cells are grouped and will toggle together, adding a unique layer of challenge.
-
-
-👑 **Win** by creating a perfectly balanced grid!
+1. Fill rows and columns to find a perfect balance.
+2. Spread shapes evenly across the grid, avoid 3 of same kind.
+3. Run out of time? Game over.
 
                 `}</ReactMarkdown>
                 <button onClick={handleStartGame}>Start Game</button>

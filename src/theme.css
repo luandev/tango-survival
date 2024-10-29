@@ -227,6 +227,10 @@ body {
   }
 }
 
+button {
+  color: white;
+}
+
 .progress.danger {
   background-color: var(--color-invalid-background); /* Red color for danger */
   animation:  progressColor 1s linear forwards, dangerPulse 1s infinite ease-in-out;
