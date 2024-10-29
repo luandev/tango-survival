@@ -7,6 +7,7 @@ import Modal from './components/Modal';
 import LevelIndicator from './components/LevelIndicator';
 import withGridHandling from './hoc/withGridHandling';
 import { levels } from './levels';
+import ParticleBackground from './components/ParticleBackground'
 //TESTCSS import './App.css';
 
 const EnhancedGrid = withGridHandling(Grid);
@@ -16,7 +17,7 @@ function App() {
   const [levelIndex, setLevelIndex] = useState(0);
   const currentLevel = levels[levelIndex];
 
-  const [time, setTime] = useState(90000);
+  const [time, setTime] = useState(5000);
   const [showModal, setShowModal] = useState(true);
 
 
@@ -42,12 +43,13 @@ function App() {
 
   return (
     <Fragment>
+      <ParticleBackground />
       <header>
         <h1>💃 tango</h1>
       </header>
       <main>
         <GameProvider>
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <div className='game-container'>
             <LevelIndicator currentLevel={currentLevel.level} totalLevels={totalLevels} />
             <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
             <EnhancedGrid

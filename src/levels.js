@@ -1,10 +1,6 @@
 // levels.js
 export const levels = [
-    {
-        level: 1,
-        size: 4,
-        gridData: Array.from({ length: 4 }, () => Array(4).fill(null)),
-    },
+
     {
         level: 2,
         size: 4,

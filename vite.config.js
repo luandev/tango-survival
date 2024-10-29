@@ -9,7 +9,7 @@ export default defineConfig({
     assetsDir:'.',
     rollupOptions: {
       output: {
-        assetFileNames: '[hash:10].',
+        assetFileNames: '[hash:10].[ext]',
         entryFileNames: '[hash:10].js',
         // inlineDynamicImports: false,
         // format: 'iife',
