@@ -152,7 +152,9 @@ body {
   background-color: var(--color-cross-background);
   border-color: var(--color-cross-border);
 }
-
+.group-cell {
+  border-color: red;
+}
 /* Timer */
 .timer .low {
   color: var(--color-timer-low);

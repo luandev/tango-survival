@@ -2,10 +2,11 @@
 import React from 'react';
 //TESTCSS import './Grid.css';
 
-const Cell = ({ value, validation, onClick }) => {
+const Cell = ({ value, validation, onClick, groupId }) => {
   return (
     <div
-      className={`grid-cell ${validation}`}
+      data-group={groupId}
+      className={`grid-cell ${validation} ${groupId ? 'group-cell' : ''}`}
       onClick={onClick}
     >
       {value && <span className={value} />}

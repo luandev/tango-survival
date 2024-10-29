@@ -18,17 +18,6 @@ export const validateColumn = (grid, colIndex) => {
   return !column.some(cell => cell == undefined) && validateSequence(column) && validateBalance(column);
 };
 
-// Universal validation logic for ensuring no more than 2 successive states and equal number of states
-export const validateGridOnCellChange = (grid, rowIndex, colIndex) => {
-  const isRowValid = validateRow(grid, rowIndex);
-  const isColumnValid = validateColumn(grid, colIndex);
-
-  return {
-    isRowValid,
-    isColumnValid,
-  };
-};
-
 // New function to validate the whole grid
 export const validateWholeGrid = (grid) => {
   const size = grid.length;

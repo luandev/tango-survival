@@ -22,25 +22,46 @@ const withGridHandling = (WrappedComponent) => {
       });
     }, [levelData.level]);
 
-    const handleCellChange = (row, col) => {
+    const handleCellChange = (row, col, cellData) => {
+      // Calculate the index of the clicked cell
+      const currentIndex = cellData.cellIndex;
+    
+      // Find the group that includes the clicked cell's index
+      const group = currentLevelData.groupedCells.find(group => group.includes(cellData.cellIndex));
+    
+      // Determine which indices need to be toggled
+      const indicesToToggle = group ? group : [currentIndex];
+      
+      // Create a Set for efficient lookup
+      const toggleSet = new Set(indicesToToggle);
+    
+      // Create a new grid with updated cell states
       const updatedGrid = currentLevelData.gridData.map((rowArr, rowIndex) =>
-        rowIndex === row
-          ? rowArr.map((cell, colIndex) => (colIndex === col ? toggleCellState(cell) : cell))
-          : rowArr
+        rowArr.map((cell, colIndex) => {
+          const index = rowIndex * currentLevelData.size + colIndex;
+          if (toggleSet.has(index)) {
+            // Toggle the state of the cell
+            return toggleCellState(cell);
+          }
+          // Return the cell as is if it's not in the toggle set
+          return cell;
+        })
       );
-
+    
+      // Validate the updated grid
       const { isGridValid, validationResults } = validateWholeGrid(updatedGrid);
 
+      setCurrentLevelData(prevData => ({
+        ...prevData,
+        gridData: updatedGrid,
+        validationData: validationResults,
+      }));
+    
       if (isGridValid) {
         proceedToNextLevel();
-      } else {
-        setCurrentLevelData((prevData) => ({
-          ...prevData,
-          gridData: updatedGrid,
-          validationData: validationResults,
-        }));
-      }
+      } 
     };
+    
 
     const toggleCellState = (cell) => (cell === 'circle' ? 'square' : 'circle');
 
@@ -58,6 +79,7 @@ const withGridHandling = (WrappedComponent) => {
           size={currentLevelData.size}
           gridData={currentLevelData.gridData}
           validationData={currentLevelData.validationData}
+          groupedCells={currentLevelData.groupedCells}
           onCellChange={handleCellChange}
         />
       );

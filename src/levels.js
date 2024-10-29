@@ -5,6 +5,7 @@ export const levels = [
         level: 2,
         size: 4,
         gridData: Array.from({ length: 4 }, () => Array(4).fill(null)),
+        groupedCells:[]
     },
     {
         level: 3,
