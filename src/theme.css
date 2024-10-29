@@ -26,7 +26,7 @@
   --color-grid-cell-background: #fffff5;
   --color-grid-cell-box-shadow1: #a7a7a752;
   --color-grid-cell-box-shadow2: #ffffffa2;
-  --color-circle-background: #ff0099;
+  --color-circle-background: #ff4e44;
   --color-circle-border: red;
   --color-square-background: #00f9;
   --color-square-border: blue;
@@ -88,7 +88,12 @@ body {
   background-color: var(--color-grid-background);
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0.2em 0.4em 0.4em 0.2em var(--color-grid-box-shadow) inset;
+  border: 1px solid white;
+  box-shadow: 0.2em 0.4em 0.4em 0.2em var(--color-grid-box-shadow) inset, 0em 0em 10em 2em rgba(0, 0, 0, 0.588);
+}
+
+.grid-container {
+  display: grid;
   border: 1px solid black;
 }
 

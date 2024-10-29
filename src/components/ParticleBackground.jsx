@@ -1,26 +1,31 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const ParticleBackground = ({
+const ParticleBackground = forwardRef(({
     particleCount = 700,
-    particlePropCount = 10, // Increased from 9 to 10 to accommodate shape
+    particlePropCount = 10,
     baseTTL = 100,
     rangeTTL = 500,
     baseSpeed = 0.1,
-    rangeSpeed = 100,
+    rangeSpeed = 1,
     baseSize = 2,
     rangeSize = 10,
-    baseHue = 10,
-    rangeHue = 100,
-    backgroundColor = 'transparent', // Set to transparent
-    maxOpacity = 1 // New prop to control maximum opacity
-} = {}) => {
-    const particlePropsLength = particleCount * particlePropCount;
-
+    circleHue = 0, // Hue for circles
+    squareHue = 200,   // Hue for squares
+    backgroundColor = 'transparent',
+    maxOpacity = 1,
+    intensity = 0.1, // Intensity of the animation (0 to 1)
+}, ref) => {
     const canvasRef = useRef(null);
-    const particleProps = useRef(new Float32Array(particlePropsLength)).current;
+    const particleProps = useRef([]);
     const tick = useRef(0);
     const center = useRef([window.innerWidth / 2, window.innerHeight / 2]);
+    const [activeParticleCount, setActiveParticleCount] = React.useState(Math.floor(particleCount * intensity));
+
+    // Expose methods via ref
+    useImperativeHandle(ref, () => ({
+        triggerExplosion,
+    }));
 
     useEffect(() => {
         const canvas = {
@@ -31,6 +36,10 @@ const ParticleBackground = ({
             a: canvas.a.getContext('2d'),
             b: canvas.b.getContext('2d')
         };
+
+        // Initialize particle properties array
+        const particlePropsLength = particleCount * particlePropCount;
+        particleProps.current = new Float32Array(particlePropsLength);
 
         function resize() {
             canvas.a.width = window.innerWidth;
@@ -54,33 +63,33 @@ const ParticleBackground = ({
             const vy = Math.sin(theta) * 6;
             const life = 0;
             const ttl = baseTTL + Math.random() * rangeTTL;
-            const speed = baseSpeed + Math.random() * rangeSpeed;
+            const speed = (baseSpeed + Math.random() * rangeSpeed) * intensity; // Adjust speed based on intensity
             const size = baseSize + Math.random() * rangeSize;
-            const hue = baseHue + Math.random() * rangeHue;
             const shape = Math.random() < 0.5 ? 0 : 1; // 0 for square, 1 for circle
+            const hue = shape === 0 ? squareHue : circleHue; // Assign hue based on shape
 
-            particleProps.set([x, y, vx, vy, life, ttl, speed, size, hue, shape], i);
+            particleProps.current.set([x, y, vx, vy, life, ttl, speed, size, hue, shape], i);
         }
 
         function drawParticles() {
-            for (let i = 0; i < particlePropsLength; i += particlePropCount) {
+            for (let i = 0; i < activeParticleCount * particlePropCount; i += particlePropCount) {
                 updateParticle(i);
             }
         }
 
         function updateParticle(i) {
-            let x = particleProps[i];
-            let y = particleProps[i + 1];
-            let life = particleProps[i + 4] + 1;
-            const ttl = particleProps[i + 5];
-            const speed = particleProps[i + 6];
-            const size = particleProps[i + 7];
-            const hue = particleProps[i + 8];
-            const shape = particleProps[i + 9];
+            let x = particleProps.current[i];
+            let y = particleProps.current[i + 1];
+            let life = particleProps.current[i + 4] + 1;
+            const ttl = particleProps.current[i + 5];
+            const speed = particleProps.current[i + 6];
+            const size = particleProps.current[i + 7];
+            const hue = particleProps.current[i + 8];
+            const shape = particleProps.current[i + 9];
 
             const theta = Math.atan2(y - center.current[1], x - center.current[0]) + 0.75 * Math.PI / 2;
-            const vx = 0.95 * particleProps[i + 2] + 0.05 * Math.cos(theta) * 2;
-            const vy = 0.95 * particleProps[i + 3] + 0.05 * Math.sin(theta) * 2;
+            const vx = 0.95 * particleProps.current[i + 2] + 0.05 * Math.cos(theta) * 2;
+            const vy = 0.95 * particleProps.current[i + 3] + 0.05 * Math.sin(theta) * 2;
 
             const x2 = x + vx * speed;
             const y2 = y + vy * speed;
@@ -88,7 +97,6 @@ const ParticleBackground = ({
             ctx.a.save();
             ctx.a.lineCap = 'round';
             ctx.a.lineWidth = 1;
-            // Ensure opacity does not exceed maxOpacity
             const currentOpacity = Math.min(fadeInOut(life, ttl), maxOpacity);
             ctx.a.strokeStyle = `hsla(${hue},100%,60%,${currentOpacity})`;
             ctx.a.beginPath();
@@ -106,11 +114,11 @@ const ParticleBackground = ({
             ctx.a.restore();
 
             // Update particle properties
-            particleProps[i] = x2;
-            particleProps[i + 1] = y2;
-            particleProps[i + 2] = vx;
-            particleProps[i + 3] = vy;
-            particleProps[i + 4] = life;
+            particleProps.current[i] = x2;
+            particleProps.current[i + 1] = y2;
+            particleProps.current[i + 2] = vx;
+            particleProps.current[i + 3] = vy;
+            particleProps.current[i + 4] = life;
 
             // Reinitialize particle if its life exceeds TTL
             if (life > ttl) initParticle(i);
@@ -124,7 +132,7 @@ const ParticleBackground = ({
         function draw() {
             tick.current++;
             ctx.a.clearRect(0, 0, canvas.a.width, canvas.a.height);
-            ctx.b.clearRect(0, 0, canvas.b.width, canvas.b.height); // Ensure transparency
+            ctx.b.clearRect(0, 0, canvas.b.width, canvas.b.height);
 
             drawParticles();
             renderGlow();
@@ -154,6 +162,20 @@ const ParticleBackground = ({
             ctx.b.restore();
         }
 
+        function triggerExplosion() {
+            // Loop through particles and set velocities to make them shoot outwards
+            for (let i = 0; i < particleProps.current.length; i += particlePropCount) {
+                const x = particleProps.current[i];
+                const y = particleProps.current[i + 1];
+                const angle = Math.atan2(y - center.current[1], x - center.current[0]);
+                const speed = (2 + Math.random() * 4) * intensity; // Adjust speed
+
+                particleProps.current[i + 2] = Math.cos(angle) * speed;
+                particleProps.current[i + 3] = Math.sin(angle) * speed;
+                particleProps.current[i + 4] = 0; // Reset life
+            }
+        }
+
         window.addEventListener('resize', resize);
         resize();
         initParticles();
@@ -171,11 +193,17 @@ const ParticleBackground = ({
         rangeSpeed,
         baseSize,
         rangeSize,
-        baseHue,
-        rangeHue,
+        circleHue,
+        squareHue,
         backgroundColor,
-        maxOpacity // Added to dependency array
+        maxOpacity,
+        intensity,
     ]);
+
+    // Update activeParticleCount when intensity changes
+    useEffect(() => {
+        setActiveParticleCount(Math.floor(particleCount * intensity));
+    }, [intensity, particleCount]);
 
     return (
         <canvas
@@ -187,13 +215,12 @@ const ParticleBackground = ({
                 width: '100%',
                 height: '100%',
                 zIndex: -1,
-                pointerEvents: 'none', // Prevent canvas from capturing mouse events
+                pointerEvents: 'none',
             }}
         />
     );
-};
+});
 
-// Define PropTypes for better type checking and documentation
 ParticleBackground.propTypes = {
     particleCount: PropTypes.number,
     particlePropCount: PropTypes.number,
@@ -203,10 +230,11 @@ ParticleBackground.propTypes = {
     rangeSpeed: PropTypes.number,
     baseSize: PropTypes.number,
     rangeSize: PropTypes.number,
-    baseHue: PropTypes.number,
-    rangeHue: PropTypes.number,
+    circleHue: PropTypes.number, // Hue for circles
+    squareHue: PropTypes.number, // Hue for squares
     backgroundColor: PropTypes.string,
-    maxOpacity: PropTypes.number, // New prop type
+    maxOpacity: PropTypes.number,
+    intensity: PropTypes.number, // Intensity of the animation (0 to 1)
 };
 
 export default ParticleBackground;

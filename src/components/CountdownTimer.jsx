@@ -8,17 +8,6 @@ const CountdownTimer = ({ time, onComplete, isPaused, renderProgressBar = true }
     const lastPlayedRef = useRef(null);
     const audio = new Audio();
 
-    function getInterpolatedColor(progressPercentage, startHSL = { h: 120, s: 100, l: 50 }, endHSL = { h: 0, s: 80, l: 40 }) {
-        const interpolate = (start, end) => start + (end - start) * (progressPercentage / 100);
-
-        const hue = interpolate(startHSL.h, endHSL.h);
-        const saturation = interpolate(startHSL.s, endHSL.s);
-        const lightness = interpolate(startHSL.l, endHSL.l);
-
-        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-    }
-
-    // Reset countdown whenever the `time` prop changes
     useEffect(() => {
         setTimeLeft(time);
         clearInterval(intervalRef.current);
