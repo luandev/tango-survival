@@ -46,7 +46,7 @@ function App() {
 
   const handleComplete = () => {
     console.log('Countdown completed!');
-    // TODO game over modal
+    particleRef.current.triggerEffect();
   };
 
   const handleLevelUp = () => {
@@ -58,17 +58,17 @@ function App() {
     }
   };
 
-
+  const timeLeftPercent = 1.1-(timeLeft * 1 / time);
   return (
     <Fragment>
-      <ParticleBackground ref={particleRef}  />
+      <ParticleBackground ref={particleRef} maxOpacity={0.6} hecticness={timeLeftPercent} />
       <header>
         <h1>💃 tango</h1>
       </header>
       <main>
         <GameProvider>
           <div className='game-container'>
-      <p>{}</p>
+          {/* <button onClick={handleComplete}>Next Level</button> */}
             <LevelIndicator currentLevel={currentLevel.level} totalLevels={totalLevels} />
             <CountdownTimer totalTime={time} timeLeft={timeLeft}/>
             <EnhancedGrid
