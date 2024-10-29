@@ -1,5 +1,5 @@
 // App.js
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef, useEffect } from 'react';
 import Grid from './components/Grid';
 import { GameProvider } from './context/GameContext';
 import CountdownTimer from './components/CountdownTimer';
@@ -17,13 +17,31 @@ function App() {
   const [levelIndex, setLevelIndex] = useState(0);
   const currentLevel = levels[levelIndex];
 
-  const [time, setTime] = useState(5000);
+  const [time, setTime] = useState(19000);
   const [showModal, setShowModal] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(time); // Initialize timeLeft here
+  const [isPaused, setIsPaused] = useState(false); // Add isPaused state
+  const intervalRef = useRef(null);
+  const particleRef = useRef();
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      if (!isPaused && timeLeft > 0) {
+        setTimeLeft((prevTime) => prevTime - 300);
+      } 
+      if (timeLeft <=0) {
+          clearInterval(intervalRef.current);
+      }
+    }, 300);
+
+    return () => clearInterval(intervalRef.current);
+  }, [isPaused, timeLeft]);
 
 
   const handleStartGame = () => {
     console.log('Game started!');
     setShowModal(false);
+    setIsPaused(false);
   };
 
   const handleComplete = () => {
@@ -43,15 +61,16 @@ function App() {
 
   return (
     <Fragment>
-      <ParticleBackground />
+      <ParticleBackground ref={particleRef}  />
       <header>
         <h1>💃 tango</h1>
       </header>
       <main>
         <GameProvider>
           <div className='game-container'>
+      <p>{}</p>
             <LevelIndicator currentLevel={currentLevel.level} totalLevels={totalLevels} />
-            <CountdownTimer time={time} onComplete={handleComplete} isPaused={showModal} />
+            <CountdownTimer totalTime={time} timeLeft={timeLeft}/>
             <EnhancedGrid
               onLevelUp={handleLevelUp}
               levelData={currentLevel}
