@@ -102,11 +102,10 @@ body {
   justify-content: center;
 }
 
-.grid-cell {
+.grid-cell  {
   transition: all 0.3s;
   min-width: 51px;
   min-height: 51px;
-  border: 1px solid var(--color-grid-cell-border);
   border-radius: 3px;
   margin: 6px;
   display: flex;
@@ -117,7 +116,16 @@ body {
   box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-grid-cell-box-shadow1),
     0.1em 0.2em 0.2em 0.1em inset var(--color-grid-cell-box-shadow2);
 }
+.group-cell-container {
+  background-color: rgba(163, 90, 205, 0.5);
+  margin: 0px;
+  border-radius: 5px;
+}
+.group-cell {
+  box-shadow: none;
+  border: 1px solid rgb(135, 59, 179);
 
+}
 /* Shapes */
 .circle {
   transition: all 0.3s;
@@ -152,9 +160,7 @@ body {
   background-color: var(--color-cross-background);
   border-color: var(--color-cross-border);
 }
-.group-cell {
-  border-color: red;
-}
+
 /* Timer */
 .timer .low {
   color: var(--color-timer-low);

@@ -6,45 +6,13 @@ import CountdownTimer from './components/CountdownTimer';
 import ReactMarkdown from 'react-markdown';
 import LevelIndicator from './components/LevelIndicator';
 import withGridHandling from './hoc/withGridHandling';
-import { generateGridWithGroups } from './generateGrid.js';
+import { generateLevels } from './generateGrid.js';
 import ParticleBackground from './components/ParticleBackground';
 // TESTCSS import './App.css';
 
 const EnhancedGrid = withGridHandling(Grid);
 
-/**
- * Generates a list of unique level configurations.
- * Ensures that no two levels have the same set of parameters.
- *
- * @param {number} totalLevels - The total number of levels to generate.
- * @returns {Array} - An array of generated level data.
- */
-const generateLevels = (totalLevels) => {
-  const levels = [];
-  const usedConfigs = new Set();
 
-  for (let i = 1; i <= totalLevels; i++) {
-    let gridSize, maxGroupSize, groupCount;
-    let configKey;
-
-    // Continue generating until a unique configuration is found
-    do {
-      // Define logic for generating unique parameters
-      // Adjust ranges and logic based on your game's requirements
-      gridSize = 4 + 2 * Math.floor((i - 1) / 3);
-      maxGroupSize = 2 + (i % 2); // Alternates between 2 and 3
-      groupCount = Math.floor(i / 2) + 1; // Increment group count every 2 levels
-
-      configKey = `${gridSize}-${maxGroupSize}-${groupCount}`;
-    } while (usedConfigs.has(configKey));
-
-    usedConfigs.add(configKey);
-
-    levels.push(generateGridWithGroups(gridSize, maxGroupSize, groupCount, i));
-  }
-
-  return levels;
-};
 
 function App() {
   const totalLevels = 10;

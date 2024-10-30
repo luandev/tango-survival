@@ -1,4 +1,36 @@
 /**
+ * Generates a list of unique level configurations.
+ * Ensures that no two levels have the same set of parameters.
+ *
+ * @param {number} totalLevels - The total number of levels to generate.
+ * @returns {Array} - An array of generated level data.
+ */
+const generateLevels = (totalLevels) => {
+    const levels = [];
+    const usedConfigs = new Set();
+  
+    for (let i = 1; i <= totalLevels; i++) {
+      let gridSize, maxGroupSize, groupCount;
+      let configKey;
+  
+      do {
+        gridSize = 4 + 2 * Math.floor((i - 1) / 3);
+        maxGroupSize = 1 + Math.random() *4;
+        groupCount = Math.floor(i / 2) + 1; // Increment group count every 2 levels
+  
+        configKey = `${gridSize}-${maxGroupSize}-${groupCount}`;
+      } while (usedConfigs.has(configKey));
+  
+      usedConfigs.add(configKey);
+  
+      levels.push(generateGridWithGroups(gridSize, maxGroupSize, groupCount, i));
+    }
+  
+    return levels;
+  };
+
+
+/**
  * Generates a valid grid with neighbor-based groups.
  * @param {number} size - The size of the grid (size x size).
  * @param {number} maxGroupSize - The maximum size of a group.
@@ -248,30 +280,52 @@ function shuffleArray(array) {
  * @returns {(string | null)[][]} The masked grid with only grouped cells revealed.
  */
 function maskGridData(solvedGrid, groupedCells, size) {
-    // Initialize the masked grid with nulls
-    const maskedGrid = Array.from({ length: size }, () => Array(size).fill(null));
+    const maskedGrid = solvedGrid.map(row => row.map(() => null));
 
-    // Create a Set of all grouped cell indices for faster lookup
-    const groupedCellIndices = new Set();
-    groupedCells.forEach(group => {
-        group.forEach(cellIndex => {
-            groupedCellIndices.add(cellIndex);
-        });
+  // Iterate through the grouped cells and reveal them on the masked grid
+  groupedCells.forEach(group => {
+    group.forEach(cellIndex => {
+      const row = Math.floor(cellIndex / size);
+      const col = cellIndex % size;
+      maskedGrid[row][col] = solvedGrid[row][col]; // Copy state from solvedGrid
     });
+  });
 
-    // Iterate through the solved grid and reveal only grouped cells
-    for (let row = 0; row < size; row++) {
-        for (let col = 0; col < size; col++) {
-            const cellIndex = row * size + col;
-            if (groupedCellIndices.has(cellIndex)) {
-                maskedGrid[row][col] = solvedGrid[row][col];
-            } else {
-                maskedGrid[row][col] = undefined;
-            }
-        }
-    }
 
-    return maskedGrid;
+  const groupsToToggle = getRandomGroupsToToggle(groupedCells);
+
+  groupsToToggle.forEach(groupIndex => {
+    const group = groupedCells[groupIndex];
+    group.forEach(cellIndex => {
+      const row = Math.floor(cellIndex / size);
+      const col = cellIndex % size;
+
+      maskedGrid[row][col] = toggleCellState(maskedGrid[row][col]); 
+    });
+  });
+
+  return maskedGrid;
 }
 
-export { generateGridWithGroups };
+function getRandomGroupsToToggle(groupedCells) {
+  const numGroupsToToggle = Math.floor(Math.random() * groupedCells.length);
+  const groupsToToggle = [];
+
+  for (let i = 0; i < numGroupsToToggle; i++) {
+    let randomGroupIndex;
+    do {
+      randomGroupIndex = Math.floor(Math.random() * groupedCells.length);
+    } while (groupsToToggle.includes(randomGroupIndex));
+
+    groupsToToggle.push(randomGroupIndex);
+  }
+
+  return groupsToToggle;
+}
+
+function toggleCellState(cellValue) {
+  return cellValue === 'circle' ? 'square' : 'circle';
+}
+
+
+export { generateLevels };
