@@ -86,6 +86,3 @@ Special thanks to:
 
 Ready to dive into the dance of logic? [![Play the Game](https://img.shields.io/badge/Play%20Now-Tango--Survival-blue?style=for-the-badge)](https://luandev.github.io/tango-survival/)
 
---- 
-
-This README now contextualizes Tango-Survival as inspired by LinkedIn's Tango while providing engineering insights into its development with Google IDX. Let me know if you need further modifications!
