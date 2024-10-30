@@ -202,7 +202,7 @@
     background-color: var(--body-background);
     border-radius: 5px;
     overflow: hidden;
-    margin: 0.4em;
+    margin: 0.5em;
     box-shadow: 0.1em 0.2em 0.2em 0.1em var(--color-shadow);
   }
   

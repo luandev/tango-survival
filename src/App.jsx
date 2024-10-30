@@ -19,8 +19,8 @@ function App() {
 
   // Game state: 'lobby', 'game-start', 'game-over'
   const [gameState, setGameState] = useState('lobby');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('Beginner'); 
-  const [levels, setLevels] = useState([]); 
+  const [selectedDifficulty, setSelectedDifficulty] = useState('Beginner');
+  const [levels, setLevels] = useState([]);
 
   const [levelIndex, setLevelIndex] = useState(0);
   const baseTime = 60000; // 60 seconds
@@ -28,7 +28,7 @@ function App() {
   const intervalRef = useRef(null);
   const particleRef = useRef();
 
-  
+
 
   // Timer Effect
   useEffect(() => {
@@ -99,30 +99,48 @@ function App() {
             {gameState === 'lobby' && (
               <div className='modal-content'>
 
-                
+
 
 
                 <ReactMarkdown className="modal-message">{`
 ## Welcome to Tango!
 
-1. Fill rows and columns to find a perfect balance.
-2. Spread shapes evenly across the grid, avoid 3 of same kind.
-3. Run out of time? Game over.
+- **Fill the Grid:** Place circles and squares to complete each row and column.
+- **Balance Each Row and Column:** Keep an equal mix of shapes, like binary sudoku.
+- **Avoid Clusters:** No more than two of the same shape side-by-side.
+- **Purple Groups Move Together:** Plan ahead; changing one changes all.
+- **Beat the Clock:** Complete the grid before time runs out!
+
+**Good luck, and let the Tango begin!** 💃
 
                 `}</ReactMarkdown>
-                <input 
-                  type="range" 
-                  min="0" 
-                  max="4" 
-                  value={['Beginner', 'Amateur', 'Intermediate', 'Advanced', 'Grandmaster'].indexOf(selectedDifficulty)} 
-                  onChange={(e) => {
-                    const difficultyLevels = ['Beginner', 'Amateur', 'Intermediate', 'Advanced', 'Grandmaster'];
-                    setSelectedDifficulty(difficultyLevels[e.target.value]);
-                  }}
-                  className="difficulty-slider"
-                />
-                <div className="difficulty-label">{selectedDifficulty}</div>
-                <button onClick={handleStartGame}>Start Game</button>
+                <div style={{
+                  flexDirection: 'row',
+                  display: 'flex',
+                  rowGap: '20px',
+                  width: '100%',
+                  justifyContent: 'space-evenly',
+                }}>
+                  <div style={{
+                    flexDirection: 'column',
+                    width: '200px',
+                  }}>
+                    <input
+                      type="range"
+                      min="0"
+                      max="4"
+                      value={['Beginner', 'Amateur', 'Intermediate', 'Advanced', 'Grandmaster'].indexOf(selectedDifficulty)}
+                      onChange={(e) => {
+                        const difficultyLevels = ['Beginner', 'Amateur', 'Intermediate', 'Advanced', 'Grandmaster'];
+                        setSelectedDifficulty(difficultyLevels[e.target.value]);
+                      }}
+                      className="difficulty-slider"
+                    />
+                    <div className="difficulty-label">{selectedDifficulty}</div>
+                  </div>
+
+                  <button onClick={handleStartGame}>Start Game</button>
+                </div>
 
               </div>
             )}
@@ -150,27 +168,6 @@ function App() {
           Gimme feedback and a ⭐ on <a href="https://github.com/luandev/tango-survival">GitHub</a>!
         </p>
       </footer>
-      {/* 
-      {showModal && (
-        <Modal
-          message={`
-## Welcome to Tango!  
-### Rules
-- Max 2 repeated shapes
-- Rows and columns must match, like sudoku
-- Run out of time? Game over.
-
-### How to Play
-- 👉 Click cells to toggle circle or square.
-- 💀 Red means missteps.
-- 🏆 Balance the grid to win!
-- ✌️ Challenge your friends to beat your score
-          `}
-          showOk={true}
-          onOk={handleStartGame}
-        />
-      )} 
-      */}
     </Fragment>
   );
 }
