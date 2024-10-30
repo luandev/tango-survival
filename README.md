@@ -29,13 +29,6 @@ This inspired **Tango-Survival**, where players apply similar balance-based rule
 
 **Project IDX** by Google was integral to the development of Tango-Survival. It provided an AI-supported development environment where code suggestions, debugging tools, and cloud-based testing accelerated our workflow. IDX enabled us to streamline development, test cross-platform compatibility, and leverage AI assistance for code quality and speed, all from a cloud-hosted, collaborative environment. For more details on Google Project IDX, visit [idx.dev](https://idx.dev).
 
-## Features
-
-- **Interactive Gameplay**: Strategic group movements add complexity to the challenge.
-- **Dynamic Puzzles**: Each play session generates a new configuration, ensuring replayability.
-- **Error Feedback**: Invalid configurations are highlighted to help players refine their moves.
-- **Responsive Design**: Optimized for seamless gameplay on any device.
-
 ## Installation
 
 Set up the game locally with:
@@ -50,39 +43,17 @@ cd tango-survival
 # Install dependencies
 npm install
 
-# Run the game
-npm start
+# compile
+npm run build
+
+# preview
+npm run preview
+
+# dev
+npm run dev
 ```
 
-## Technology Stack
 
-- **React**: Handles the dynamic UI and gameplay logic.
-- **CSS**: Styles the interactive grid and provides feedback for errors.
-- **Jest**: Ensures that game logic is tested thoroughly.
-- **Vite**: Powers efficient builds and smooth deployment.
 
-## Contributing
 
-We welcome contributions from developers and puzzle enthusiasts! Follow these steps to contribute:
-
-1. **Fork the Repository**.
-2. **Create a Branch**: Use a feature-based branch name.
-3. **Commit and Push Your Changes**.
-4. **Submit a Pull Request**.
-
-## License
-
-This project is licensed under the MIT License.
-
-## Acknowledgements
-
-Special thanks to:
-
-- **LinkedIn’s Tango Game**: For inspiring the design and concept of Tango-Survival.
-- **Google Project IDX**: For providing a powerful cloud-based development environment.
-- **Community Testers**: For invaluable feedback on gameplay and usability.
-
----
-
-Ready to dive into the dance of logic? [![Play the Game](https://img.shields.io/badge/Play%20Now-Tango--Survival-blue?style=for-the-badge)](https://luandev.github.io/tango-survival/)
 
