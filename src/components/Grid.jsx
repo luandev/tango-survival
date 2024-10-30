@@ -36,7 +36,7 @@ const Grid = forwardRef(({ size, gridData, validationData, groupedCells, onCellC
   }
 
   return (
-    <div className="grid">
+    <div data-size={size} className="grid">
       {gridData.map((row, rowIndex) => (
         <div key={rowIndex} className="grid-row">
           {row.map((cell, colIndex) => (
