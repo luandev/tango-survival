@@ -17,17 +17,18 @@ const EnhancedGrid = withGridHandling(Grid);
 function App() {
   const totalLevels = 10;
 
-  // Generate levels with unique configurations
-  const levels = useMemo(() => generateLevels(totalLevels), [totalLevels]);
-
   // Game state: 'lobby', 'game-start', 'game-over'
   const [gameState, setGameState] = useState('lobby');
+  const [selectedDifficulty, setSelectedDifficulty] = useState('Beginner'); 
+  const [levels, setLevels] = useState([]); 
 
   const [levelIndex, setLevelIndex] = useState(0);
   const baseTime = 60000; // 60 seconds
   const [timeLeft, setTimeLeft] = useState(baseTime);
   const intervalRef = useRef(null);
   const particleRef = useRef();
+
+  
 
   // Timer Effect
   useEffect(() => {
@@ -70,9 +71,11 @@ function App() {
 
   // Start Game
   const handleStartGame = () => {
-    setGameState('game-start');
+    const levels = generateLevels(totalLevels, selectedDifficulty);
+    setLevels(levels);
     setLevelIndex(0);
     setTimeLeft(baseTime);
+    setGameState('game-start');
   };
 
   // Restart Game
@@ -95,6 +98,10 @@ function App() {
           <div className='game-container'>
             {gameState === 'lobby' && (
               <div className='modal-content'>
+
+                
+
+
                 <ReactMarkdown className="modal-message">{`
 ## Welcome to Tango!
 
@@ -103,7 +110,20 @@ function App() {
 3. Run out of time? Game over.
 
                 `}</ReactMarkdown>
+                <input 
+                  type="range" 
+                  min="0" 
+                  max="4" 
+                  value={['Beginner', 'Amateur', 'Intermediate', 'Advanced', 'Grandmaster'].indexOf(selectedDifficulty)} 
+                  onChange={(e) => {
+                    const difficultyLevels = ['Beginner', 'Amateur', 'Intermediate', 'Advanced', 'Grandmaster'];
+                    setSelectedDifficulty(difficultyLevels[e.target.value]);
+                  }}
+                  className="difficulty-slider"
+                />
+                <div className="difficulty-label">{selectedDifficulty}</div>
                 <button onClick={handleStartGame}>Start Game</button>
+
               </div>
             )}
 

@@ -5,29 +5,35 @@
  * @param {number} totalLevels - The total number of levels to generate.
  * @returns {Array} - An array of generated level data.
  */
-const generateLevels = (totalLevels) => {
-    const levels = [];
-    const usedConfigs = new Set();
-  
-    for (let i = 1; i <= totalLevels; i++) {
-      let gridSize, maxGroupSize, groupCount;
-      let configKey;
-  
-      do {
-        gridSize = 4 + 2 * Math.floor((i - 1) / 3);
-        maxGroupSize = 1 + Math.random() *4;
-        groupCount = Math.floor(i / 2) + 1; // Increment group count every 2 levels
-  
-        configKey = `${gridSize}-${maxGroupSize}-${groupCount}`;
-      } while (usedConfigs.has(configKey));
-  
-      usedConfigs.add(configKey);
-  
-      levels.push(generateGridWithGroups(gridSize, maxGroupSize, groupCount, i));
-    }
-  
-    return levels;
+const generateLevels = (totalLevels, selectedDifficulty=0) => {
+  const levels = [];
+
+  const difficultySettings = {
+    Beginner: { gridSize: 4, maxGroupSize: 4, groupCount: 2 }, 
+    Easy: { gridSize: 6, maxGroupSize: 5, groupCount: 3 }, 
+    Medium: { gridSize: 6, maxGroupSize: 6, groupCount: 4 }, 
+    Hard: { gridSize: 8, maxGroupSize: 7, groupCount: 5 }, 
+    Grandmaster: { gridSize: 10, maxGroupSize: 8, groupCount: 6 }, 
   };
+
+  for (let i = 1; i <= totalLevels; i++) {
+    let gridSize, maxGroupSize, groupCount;
+    let configKey;
+
+    const settings = difficultySettings[selectedDifficulty];
+
+    // Apply difficulty settings with gradual increase for gridSize and groupCount
+    gridSize = settings.gridSize + 2 * Math.floor((i - 1) / (totalLevels / 3)); 
+    gridSize = gridSize % 2 === 0 ? gridSize : gridSize + 1; // Ensure gridSize is even
+    
+    maxGroupSize = settings.maxGroupSize;
+    groupCount = settings.groupCount + Math.floor((i - 1) / 2); // Increment group count every 2 levels
+
+    levels.push(generateGridWithGroups(gridSize, maxGroupSize, groupCount, i));
+  }
+
+  return levels;
+};
 
 
 /**
