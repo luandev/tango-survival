@@ -1,7 +1,3 @@
-Here’s an updated README for **Tango-Survival** with background on its inspiration from LinkedIn's **Tango** game.
-
----
-
 # 💃 Tango-Survival
 ### The Rogue-like Binary Sudoku Game
 
